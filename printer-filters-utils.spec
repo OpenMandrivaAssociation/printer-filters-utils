@@ -28,7 +28,7 @@ BuildRequires:	autoconf2.5, libtiff-devel, glib-devel, libijs-devel
 BuildRequires:	libjbig-devel, libusb-devel, libgmp-devel
 BuildRequires:	lesstif-devel, automake1.4, gimp-devel
 BuildRequires:	libnetpbm-devel
-#libgtk+-devel
+BuildRequires:	gtk2-devel
 BuildRequires:	liblcms-devel
 BuildRequires:  ghostscript, cupsddk
 %ifarch x86_64
