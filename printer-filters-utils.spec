@@ -1,5 +1,5 @@
 %define mainversion 2007
-%define mainrelease %mkrel 8
+%define mainrelease %mkrel 9
 
 %define mdv2007 %(perl -e 'print ("%mainrelease" =~ /mdv/ ? 1 : 0)')
 
@@ -1260,7 +1260,7 @@ mkdir -p %{buildroot}%{_menudir}
 cat <<EOF > %{buildroot}%{_menudir}/printer-utils
 ?package(printer-utils): needs=X11 \
 section=Configuration/Printing \
-title="Mtink - Epson inkjet printer maintenance and ink level monitor" \
+title="Mtink - Epson Inkjet Printer Tools" \
 longtitle="Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)" \
 command="/usr/bin/mtink" \
 %if %mdv2007
@@ -1269,7 +1269,7 @@ xdg=true \
 icon="/usr/share/icons/locolor/16x16/apps/printutils.png" \
 ?package(printer-utils): needs=X11 \
 section=Applications/Monitoring \
-title="Mtink - Epson inkjet printer maintenance and ink level monitor" \
+title="Mtink - Epson Inkjet Printer Tools" \
 longtitle="Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)" \
 command="/usr/bin/mtink" \
 %if %mdv2007
@@ -1283,7 +1283,7 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-mtink.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
-Name=Mtink - Epson inkjet printer maintenance and ink level monitor
+Name=Mtink - Epson Inkjet Printer Tools
 Comment=Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)
 Exec=/usr/bin/mtink
 Icon=/usr/share/icons/locolor/16x16/apps/printutils.png
