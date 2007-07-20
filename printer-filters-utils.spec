@@ -1,7 +1,5 @@
 %define mainversion 2007
-%define mainrelease %mkrel 9
-
-%define mdv2007 %(perl -e 'print ("%mainrelease" =~ /mdv/ ? 1 : 0)')
+%define mainrelease %mkrel 10
 
 %define debug 0
 
@@ -24,7 +22,7 @@ URL:		http://www.linuxprinting.org/
 
 ##### PRINTER FILTERS/UTILS BUILDREQUIRES
 
-BuildRequires:	autoconf2.5, libtiff-devel, glib-devel, libijs-devel
+BuildRequires:	autoconf, libtiff-devel, glib-devel, libijs-devel
 BuildRequires:	libjbig-devel, libusb-devel, libgmp-devel
 BuildRequires:	lesstif-devel, automake1.4, gimp-devel
 BuildRequires:	libnetpbm-devel
@@ -242,7 +240,7 @@ Requires(post):	rpm-helper
 Requires(preun):rpm-helper
 # psutils, unzip, and mscompress needed by the foo2zjs driver
 Requires:	psutils, unzip
-%if %mdv2007
+%if %mdkversion >= 200700
 Requires:	mscompress
 %endif
 # "convert" needed by "pegg"
@@ -1248,22 +1246,16 @@ chmod a+rx %{buildroot}/usr/bin/displaytestpage
 mkdir -p %{buildroot}%{_datadir}/icons/locolor/16x16/apps/
 install -m 644 printutils.png %{buildroot}%{_datadir}/icons/locolor/16x16/apps/
 # Menu entries
+
+%if %mdkversion <= 200700
 mkdir -p %{buildroot}%{_menudir}
-
-#?package(printer-utils): needs=X11 \
-#section=Configuration/Printing \
-#title="Printer Utility Program" \
-#longtitle="Graphical tool to set default options in many laser printers and maintenance for inkjets" \
-#command="/usr/bin/pup" \
-#icon="%{_datadir}/icons/locolor/16x16/apps/printutils.png"
-
 cat <<EOF > %{buildroot}%{_menudir}/printer-utils
 ?package(printer-utils): needs=X11 \
 section=Configuration/Printing \
 title="Mtink - Epson Inkjet Printer Tools" \
 longtitle="Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)" \
 command="/usr/bin/mtink" \
-%if %mdv2007
+%if %mdkversion = 200700
 xdg=true \
 %endif
 icon="/usr/share/icons/locolor/16x16/apps/printutils.png" \
@@ -1272,13 +1264,14 @@ section=Applications/Monitoring \
 title="Mtink - Epson Inkjet Printer Tools" \
 longtitle="Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)" \
 command="/usr/bin/mtink" \
-%if %mdv2007
+%if %mdkversion = 200700
 xdg=true \
 %endif
 icon="/usr/share/icons/locolor/16x16/apps/printutils.png"
 EOF
+%endif
 
-%if %mdv2007
+%if %mdkversion >= 200700
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-mtink.desktop << EOF
 [Desktop Entry]
@@ -1286,10 +1279,14 @@ Encoding=UTF-8
 Name=Mtink - Epson Inkjet Printer Tools
 Comment=Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)
 Exec=/usr/bin/mtink
-Icon=/usr/share/icons/locolor/16x16/apps/printutils.png
+Icon=printutils
 Terminal=false
 Type=Application
+%if %mdkversion >= 200800
+Categories=System;Monitor;
+%else
 Categories=X-MandrivaLinux-System-Configuration-Printing;Settings;HardwareSettings;X-MandrivaLinux-System-Monitoring;System;Monitor;
+%endif
 EOF
 %endif
 
@@ -1367,20 +1364,6 @@ cp -ax README.oki4daemon align.ps oki4daemon.init \
 	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/OKI-Winprinters
 install -m 0644 oki4drv.man %{buildroot}%{_mandir}/man1/oki4drv.1
 cd ../..
-
-%if 0
-# Menu icon
-install -m 644 printutils.png %{buildroot}%{_datadir}/icons/locolor/16x16/apps/OKI4wInst.png
-# Menu entries
-cat <<EOF > %{buildroot}%{_menudir}/printer-filters
-?package(printer-filters): needs=text \
-section=Configuration/Printing \
-title="Install OKI 4w or compatible" \
-longtitle="Install OKI 4w or compatible (these printers need an extra daemon!)" \
-command="/usr/sbin/oki4w_install" \
-icon="%{_datadir}/icons/locolor/16x16/apps/OKI4wInst.png"
-EOF
-%endif
 
 # Citizen Printiva 600C
 cd ppmtocpva-1.0
@@ -1512,7 +1495,7 @@ install -m 0755 foo2hp2600-wrapper %{buildroot}%{_bindir}
 install -m 0755 zjsdecode %{buildroot}%{_bindir}
 install -m 0755 arm2hpdl %{buildroot}%{_bindir}
 install -m 0755 okidecode %{buildroot}%{_bindir}
-%if !%mdv2007
+%if %mdkversion < 200700
 install -m 0755 msexpand %{buildroot}%{_bindir}
 %endif
 #install -m 0755 jbg2pbm %{buildroot}%{_bindir}
@@ -1846,7 +1829,7 @@ chmod -R u+w %{buildroot}%{_docdir}
 %{_bindir}/zjsdecode
 %{_bindir}/okidecode
 %{_bindir}/arm2hpdl
-%if !%mdv2007
+%if %mdkversion < 200700
 %{_bindir}/msexpand
 %endif
 #{_bindir}/jbg2pbm
@@ -1880,8 +1863,6 @@ chmod -R u+w %{buildroot}%{_docdir}
 %{_sbindir}/usb_printerid
 %{_libdir}/pentaxpj
 %config(noreplace) %{_initrddir}/oki4daemon
-#{_menudir}/printer-filters
-#{_datadir}/icons/locolor/16x16/apps/OKI4wInst.png
 %{_datadir}/foo2zjs
 %{_datadir}/foo2hp
 %{_datadir}/m2300w
@@ -1909,8 +1890,10 @@ chmod -R u+w %{buildroot}%{_docdir}
 %{_datadir}/lm1100maint
 %{_datadir}/lxcontrol
 %{_datadir}/z42tool
+%if %mdkversion <= 200700
 %{_menudir}/printer-utils
-%if %mdv2007
+%endif
+%if %mdkversion >= 200700
 %{_datadir}/applications/mandriva-mtink.desktop
 %endif
 %{_datadir}/icons/locolor/16x16/apps/printutils.png
