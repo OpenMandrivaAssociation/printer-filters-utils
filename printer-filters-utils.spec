@@ -1255,7 +1255,7 @@ section=Configuration/Printing \
 title="Mtink - Epson Inkjet Printer Tools" \
 longtitle="Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)" \
 command="/usr/bin/mtink" \
-%if %mdkversion = 200700
+%if %mdkversion == 200700
 xdg=true \
 %endif
 icon="/usr/share/icons/locolor/16x16/apps/printutils.png" \
@@ -1264,7 +1264,7 @@ section=Applications/Monitoring \
 title="Mtink - Epson Inkjet Printer Tools" \
 longtitle="Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)" \
 command="/usr/bin/mtink" \
-%if %mdkversion = 200700
+%if %mdkversion == 200700
 xdg=true \
 %endif
 icon="/usr/share/icons/locolor/16x16/apps/printutils.png"
