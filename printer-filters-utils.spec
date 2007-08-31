@@ -1,5 +1,5 @@
-%define mainversion 2007
-%define mainrelease %mkrel 10
+%define mainversion 2008
+%define mainrelease %mkrel 1
 
 %define debug 0
 
@@ -262,6 +262,39 @@ Provides:	cjet lm1100 c2070 Lexmark2070 cZ11 pnm2ppa
 Conflicts:	foomatic-db <= 3.0.1 cups-drivers < 2006
 Conflicts:	printer-utils <= 2006-11mdk
 
+# <mrl> Requires for the packages that are obsoleting this one.
+Requires:	c2050
+Requires:	c2070
+Requires:	cjet
+Requires:	cups-drivers-capt
+Requires:	cups-drivers-foo2kyo
+Requires:	cups-drivers-foo2zjs
+Requires:	cups-drivers-lbp660
+Requires:	cups-drivers-lz11
+Requires:	cups-drivers-m2300w
+Requires:	cups-drivers-pegg
+Requires:	cups-drivers-ptouch
+Requires:	drv_z42
+Requires:	epsoneplijs
+#Requires:	foomatic-db-foo2zjs
+#Requires:	foomatic-db-m2300w
+Requires:	lexmark2070
+Requires:	lexmark7000linux
+Requires:	lm1100
+Requires:	min12xxw
+Requires:	ml85p
+Requires:	oki4linux
+Requires:	pbm2l2030
+Requires:	pbm2lwxl
+Requires:	pbmtozjs
+Requires:	pentaxpj
+Requires:	pnm2ppa
+Requires:	ppmtocpva
+Requires:	ppmtomd
+Requires:	printer-filters
+Requires:	stylewriter
+Requires:	x125
+
 %package -n printer-filters-doc
 Summary: Documentation for printer filters (to support additional printers)
 Group: 		Publishing
@@ -278,6 +311,14 @@ Requires(preun):rpm-helper
 Requires:	lesstif
 Conflicts:	ghostscript < 8.15
 
+# <mrl> Requires for the packages that are obsoleting this one.
+Requires:	lm1100
+Requires:	lxcontrol
+Requires:	mtink
+Requires:	poster
+Requires:	printer-utils
+Requires:	z42tool
+
 %package -n cups-drivers
 Summary:	Special CUPS printer drivers
 Requires: 	cups >= 1.1, ghostscript >= 7.05
@@ -288,6 +329,15 @@ Conflicts:	printer-utils <= 1.0-142mdk printer-filters < 2006
 Conflicts:	cups < 1.2.0-0.5361.0mdk
 %endif
 Group: 		Publishing
+
+# <mrl> Requires for the packages that are obsoleting this one.
+Requires:	cups-drivers-lxx74
+Requires:	cups-drivers-magicolor2430dl
+Requires:	cups-drivers-magicolor5430dl
+Requires:	cups-drivers-magicolor5440dl
+Requires:	cups-drivers-pegg
+Requires:	cups-drivers-splix
+Requires:	mtink
 
 ##### DESCRIPTION TEXTS
 
@@ -325,6 +375,11 @@ their appropriate PPD files.
 
 
 %prep
+%setup -q -T -c
+mkdir printer-filters
+echo > printer-filters/debugfiles.list
+exit 0
+
 # remove old directory
 rm -rf $RPM_BUILD_DIR/%{name}-%{mainversion}
 mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}
@@ -686,6 +741,7 @@ bzcat %{SOURCE88} > getusbprinterid
 
 
 %build
+exit 0
 
 # Change compiler flags for debugging when in debug mode
 %if %debug
@@ -1040,6 +1096,8 @@ gcc -o usb_id_test usb_id_test.c
 %install
 
 rm -rf %{buildroot}
+mkdir -p %{buildroot}
+exit 0
 
 # Change compiler flags for debugging when in debug mode
 %if %debug
@@ -1779,219 +1837,12 @@ chmod -R u+w %{buildroot}%{_docdir}
 ##### FILES
 
 %files -n printer-filters
-%defattr(-,root,root)
-%config(noreplace) %{_sysconfdir}/*.conf
-%config(noreplace) %{_sysconfdir}/LexmarkZ11
-%{_mandir}/man1/foo2[zh]*.1*
-%{_mandir}/man1/zjsdecode.1*
-%{_mandir}/man1/pnm2ppa.1*
-%{_mandir}/man1/pbm2ppa.1*
-%{_mandir}/man1/oki4drv.1*
-%{_mandir}/man1/ppmtomd.1*
-%{_mandir}/man1/min12xxw.1*
-%{_mandir}/man1/pegg*.1*
-%{_libdir}/rhs
-%{_bindir}/lpstyl
-%{_bindir}/cjet
-%{_bindir}/lm1100
-%{_bindir}/c2070
-%{_bindir}/Lexmark2070
-%{_bindir}/pbm2l7k
-%{_bindir}/pnmraw2cmyk
-%{_bindir}/psprint
-%{_bindir}/pscprint
-%{_bindir}/pnm2lex7000
-%{_bindir}/pnm2lex5700
-%{_bindir}/pbm2lex5700
-%{_bindir}/dbman
-%{_bindir}/cZ11*
-%{_bindir}/lz11.*
-%{_bindir}/pnm2ppa
-%{_bindir}/calibrate_ppa
-%{_bindir}/detect_ppa
-%{_bindir}/test_ppa
-%{_bindir}/pbm2ppa
-%{_bindir}/pbmtpg
-%{_bindir}/c2050
-%{_bindir}/pbm2l2030
-%{_bindir}/oki4drv
-%{_bindir}/ppmtocpva
-%{_bindir}/cpva-colour
-%{_bindir}/*2lwxl
-%{_bindir}/z42_cmyk
-%{_bindir}/pentaxpj
-%{_bindir}/ppmtomd
-%{_bindir}/pbmtozjs
-%{_bindir}/foo2zjs*
-%{_bindir}/foo2hp*
-%{_bindir}/foo2kyo*
-%{_bindir}/zjsdecode
-%{_bindir}/okidecode
-%{_bindir}/arm2hpdl
-%if %mdkversion < 200700
-%{_bindir}/msexpand
-%endif
-#{_bindir}/jbg2pbm
-%{_bindir}/hp1000fw
-%{_bindir}/ijs_server_epsonepl
-%{_bindir}/x125*
-%{_bindir}/m2300w*
-%{_bindir}/m2400w*
-%{_bindir}/min12xxw*
-%{_bindir}/esc-m*
-%{_bindir}/pegg*
-%{_bindir}/xbm2crw*
-#{_bindir}/html2crw*
-%{_bindir}/capt*
-%{_bindir}/rastertoptch
-%ifarch %{ix86}
-%{_bindir}/lbp[46]60-*
-# "ml85p" talks directly to the parallel port I/O 0x378, not to /dev/lp0
-# Therefore SUID "root" is needed. Program only executable by "lp" & "root"
-# (group-executable). Same for "lbp660".
-%attr(4750,root,sys) %{_bindir}/ml85p
-%attr(4750,root,sys) %{_bindir}/lbp660
-%endif
-%{_sbindir}/oki4daemon
-#{_sbindir}/oki4w_install
-%{_sbindir}/pentaxsetup
-%{_sbindir}/hplj1000
-%{_sbindir}/hplj1005
-%{_sbindir}/hplj1018
-%{_sbindir}/hplj1020
-%{_sbindir}/usb_printerid
-%{_libdir}/pentaxpj
-%config(noreplace) %{_initrddir}/oki4daemon
-%{_datadir}/foo2zjs
-%{_datadir}/foo2hp
-%{_datadir}/m2300w
-%{_datadir}/foomatic/db/*/*/*.xml
-%{_datadir}/cups/model/Lex*
-%{_datadir}/cups/model/Comp*
-%{_datadir}/firmware
-%ifarch %{ix86}
-%{_datadir}/cups/model/lbp*
-%endif
-%{_datadir}/cups/model/capt*
-%{_sysconfdir}/udev/rules.d/70-hplj10xx.rules
-#{_sysconfdir}/udev/rules.d/70-hp1000fw.rules
-%dir %{_sysconfdir}/printer
 
 %files -n printer-filters-doc
-%defattr(-,root,root)
-%docdir %{_docdir}/printer-filters-doc-%{mainversion}
-%{_docdir}/printer-filters-doc-%{mainversion}
 
 %files -n printer-utils
-%defattr(-,root,root)
-%docdir %{_docdir}/printer-utils-%{mainversion}
-%{_docdir}/printer-utils-%{mainversion}
-%{_datadir}/lm1100maint
-%{_datadir}/lxcontrol
-%{_datadir}/z42tool
-%if %mdkversion <= 200700
-%{_menudir}/printer-utils
-%endif
-%if %mdkversion >= 200700
-%{_datadir}/applications/mandriva-mtink.desktop
-%endif
-%{_datadir}/icons/locolor/16x16/apps/printutils.png
-%{_mandir}/man1/poster*
-%{_sbindir}/mtinkd
-%{_sbindir}/askPrinter
-%{_sbindir}/mtink-installInitScript
-%attr(0755,root,root) %{_sbindir}/alignmargins
-%{_bindir}/displaytestpage
-%{_bindir}/lexmark2ppm.pl
-%{_bindir}/byteutil.pl
-#{_bindir}/pup
-%{_bindir}/lx.control
-%{_bindir}/changecartridge
-%{_bindir}/lm1100change
-%{_bindir}/lm1100back
-%{_bindir}/showcartridges
-%{_bindir}/hidecartridges
-%{_bindir}/headclean
-%{_bindir}/headalign
-%{_bindir}/z42tool
-%{_bindir}/mtinkc
-%{_bindir}/poster
-%{_bindir}/usb_id_test
-%{_bindir}/getusbprinterid
-# These four must be SGID sys/SUID root to be able to access the printer
-# devices
-%attr(6755,root,sys) %{_bindir}/mtink
-%attr(6755,root,sys) %{_bindir}/ttink
-%attr(2755,lp,sys) %{_libdir}/gimp/2.0/plug-ins/gimp-mtink
-%config(noreplace) %{_initrddir}/mtink
-%dir /var/mtink
-%{_datadir}/alignmargins
 
 %files -n cups-drivers
-%defattr(-,root,root)
-%docdir %{_docdir}/cups-drivers-%{mainversion}
-%{_docdir}/cups-drivers-%{mainversion}
-%{_datadir}/cups/model/KONI*
-%{_datadir}/cups/model/pegg*
-%{_datadir}/cups/model/lxx*
-%{_datadir}/cups/model/samsung*
-%attr(0755,root,root) %{_prefix}/lib*/cups/backend/*
-%attr(0755,root,root) %{_prefix}/lib*/cups/filter/*
-%{_datadir}/cups/data/*
-%config(noreplace) %{_sysconfdir}/cups/*
-%{_datadir}/KONICA_MINOLTA
-
-%post -n printer-filters
-# Restart the oki4daemon when it is running, but do not activate it by
-# default. It blocks the parallel port for non-OKI devices.
-if [ "$1" -ne "1" ]; then
-    # On update
-    service oki4daemon condrestart > /dev/null 2>/dev/null || :
-fi
-
-%post -n printer-utils
-%update_menus
-# Restart the mtinkd when it is running, but do not activate it by
-# default. It blocks the ports for non-Epson devices.
-if [ "$1" -ne "1" ]; then
-    # On update
-    service mtink condrestart > /dev/null 2>/dev/null || :
-fi
-
-%post -n cups-drivers
-# Restart the CUPS daemon when it is running, but do not start it when it
-# is not running. The restart of the CUPS daemon updates the CUPS-internal
-# PPD index
-/sbin/service cups condrestart > /dev/null 2>/dev/null || :
-
-%preun -n printer-filters
-#Stop oki4daemon when uninstalling printer-filters
-%_preun_service oki4daemon
-
-%preun -n printer-utils
-#Stop mtinkd when uninstalling printer-filters
-%_preun_service mtink
-
-%postun -n printer-filters
-if [ "$1" -ge "1" ]; then
-	# On update
-	/sbin/service oki4daemon condrestart >/dev/null 2>&1
-fi
-
-%postun -n printer-utils
-if [ "$1" -ge "1" ]; then
-	# On update
-	/sbin/service mtink condrestart >/dev/null 2>&1
-fi
-%clean_menus
-
-%postun -n cups-drivers
-# Restart the CUPS daemon when it is running, but do not start it when it
-# is not running. The restart of the CUPS daemon updates the CUPS-internal
-# PPD index
-/sbin/service cups condrestart > /dev/null 2>/dev/null || :
-
-
 
 %clean
 rm -rf %{buildroot}
