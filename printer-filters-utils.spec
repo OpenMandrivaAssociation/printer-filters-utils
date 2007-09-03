@@ -27,7 +27,7 @@ BuildRequires:	libjbig-devel, libusb-devel, libgmp-devel
 BuildRequires:	lesstif-devel, automake1.4, gimp-devel
 BuildRequires:	libnetpbm-devel
 BuildRequires:	gtk2-devel
-BuildRequires:	liblcms-devel
+#BuildRequires:	liblcms-devel
 BuildRequires:  ghostscript, cupsddk
 %ifarch x86_64
 BuildRequires:	cups-common >= 1.2.0-0.5361.0mdk
