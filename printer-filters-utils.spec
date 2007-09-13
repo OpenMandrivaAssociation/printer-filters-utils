@@ -1,5 +1,5 @@
 %define mainversion 2008
-%define mainrelease %mkrel 1
+%define mainrelease %mkrel 2
 
 %define debug 0
 
@@ -245,20 +245,6 @@ Requires:	mscompress
 %endif
 # "convert" needed by "pegg"
 Requires:	ImageMagick
-Obsoletes:	Apple-StyleWriter-printer-driver__lpstyl
-Obsoletes:	Canon-CaPSL-printer-driver__cjet Lexmark-1100-printer-driver__lm1100
-Obsoletes:	Lexmark-2070-color-printer-driver__c2070
-Obsoletes:	Lexmark-2070-grayscale-printer-driver__Lexmark2070
-Obsoletes:	Lexmark-7xxx-57xx-Z51-printer-driver__pbm2l7k
-Obsoletes:	Lexmark-Z11-printer-driver__cZ11
-Obsoletes:	cjet lm1100 c2070 Lexmark2070 cZ11 pnm2ppa
-Provides:	Apple-StyleWriter-printer-driver__lpstyl
-Provides:	Canon-CaPSL-printer-driver__cjet Lexmark-1100-printer-driver__lm1100
-Provides:	Lexmark-2070-color-printer-driver__c2070
-Provides:	Lexmark-2070-grayscale-printer-driver__Lexmark2070
-Provides:	Lexmark-7xxx-57xx-Z51-printer-driver__pbm2l7k
-Provides:	Lexmark-Z11-printer-driver__cZ11
-Provides:	cjet lm1100 c2070 Lexmark2070 cZ11 pnm2ppa
 Conflicts:	foomatic-db <= 3.0.1 cups-drivers < 2006
 Conflicts:	printer-utils <= 2006-11mdk
 
