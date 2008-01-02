@@ -226,6 +226,7 @@ Patch102:	ppmtomd-1.3-netpbm.patch
 
 ##### BUILD ROOT
 
+BuildRoot:	%_tmppath/%name-%version-%release-root
 
 ##### PACKAGE DESCRIPTIONS
 
