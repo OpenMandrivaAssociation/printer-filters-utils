@@ -1,5 +1,5 @@
 %define mainversion 2008
-%define mainrelease %mkrel 2
+%define mainrelease %mkrel 3
 
 %define debug 0
 
