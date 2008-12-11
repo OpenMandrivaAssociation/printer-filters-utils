@@ -244,7 +244,7 @@ Requires:	psutils, unzip
 Requires:	mscompress
 %endif
 # "convert" needed by "pegg"
-Requires:	ImageMagick
+Requires:	imagemagick
 Conflicts:	foomatic-db <= 3.0.1 cups-drivers < 2006
 Conflicts:	printer-utils <= 2006-11mdk
 
@@ -309,7 +309,7 @@ Requires:	z42tool
 Summary:	Special CUPS printer drivers
 Requires: 	cups >= 1.1, ghostscript >= 7.05
 # "convert" needed by "pegg"
-Requires:	ImageMagick
+Requires:	imagemagick
 Conflicts:	printer-utils <= 1.0-142mdk printer-filters < 2006
 %ifarch x86_64
 Conflicts:	cups < 1.2.0-0.5361.0mdk
