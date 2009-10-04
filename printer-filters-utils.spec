@@ -22,13 +22,13 @@ URL:		http://www.linuxprinting.org/
 
 ##### PRINTER FILTERS/UTILS BUILDREQUIRES
 
-BuildRequires:	autoconf, libtiff-devel, glib-devel, libijs-devel
+BuildRequires:	autoconf, libtiff-devel, libijs-devel
 BuildRequires:	libjbig-devel, libusb-devel, libgmp-devel
 BuildRequires:	lesstif-devel, automake1.4, gimp-devel
 BuildRequires:	libnetpbm-devel
 BuildRequires:	gtk2-devel
 #BuildRequires:	liblcms-devel
-BuildRequires:  ghostscript, cupsddk
+BuildRequires:  ghostscript
 %ifarch x86_64
 BuildRequires:	cups-common >= 1.2.0-0.5361.0mdk
 %else
