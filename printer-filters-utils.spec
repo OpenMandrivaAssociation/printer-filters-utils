@@ -367,10 +367,10 @@ echo > printer-filters/debugfiles.list
 exit 0
 
 # remove old directory
-rm -rf $RPM_BUILD_DIR/%{name}-%{mainversion}
-mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}
+rm -rf %{_builddir}/%{name}-%{mainversion}
+mkdir %{_builddir}/%{name}-%{mainversion}
 
-mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
+mkdir %{_builddir}/%{name}-%{mainversion}/printer-filters
 
 # Apple StyleWriter
 %setup -q -T -D -a 50 -n %{name}-%{mainversion}/printer-filters
@@ -408,7 +408,7 @@ cd ..
 # Lexmark Z11
 %setup -q -T -D -a 56 -n %{name}-%{mainversion}/printer-filters
 #setup -q -T -D -a 56 -n %{name}-%{mainversion}/printer-filters
-#bzcat %SOURCE72 > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/LexZ11-distro/cZ11.c
+#bzcat %SOURCE72 > %{_builddir}/%{name}-%{mainversion}/printer-filters/LexZ11-distro/cZ11.c
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lx11*/makefile
 
 # Printer Utility Program
@@ -417,16 +417,16 @@ perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lx11*/makefile
 # Lexmark printer maintenance
 %setup -q -T -D -a 58 -n %{name}-%{mainversion}/printer-filters
 %setup -q -T -D -a 59 -n %{name}-%{mainversion}/printer-filters
-bzcat %{SOURCE60} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/changecartridge
-#cp $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/pup_1.1/README \
-#	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.LexmarkOptra40_45
-mv $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark \
-	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark5xxx_7xxx
-mv $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lm1100maint/README \
-	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lm1100maint/README.Lexmark1xxx
+bzcat %{SOURCE60} > %{_builddir}/%{name}-%{mainversion}/printer-filters/changecartridge
+#cp %{_builddir}/%{name}-%{mainversion}/printer-filters/pup_1.1/README \
+#	%{_builddir}/%{name}-%{mainversion}/printer-filters/README.LexmarkOptra40_45
+mv %{_builddir}/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark \
+	%{_builddir}/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark5xxx_7xxx
+mv %{_builddir}/%{name}-%{mainversion}/printer-filters/lm1100maint/README \
+	%{_builddir}/%{name}-%{mainversion}/printer-filters/lm1100maint/README.Lexmark1xxx
 
 # Generate doc file for "changecartridge"
-cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.changecartridge
+cat << EOF > %{_builddir}/%{name}-%{mainversion}/printer-filters/README.changecartridge
 
 changecartridge - a program for changing the ink cartridges
                   in the Lexmark 5xxx and 7xxx printers.
@@ -450,7 +450,7 @@ variable in /usr/bin/changecartridge.
 
 EOF
 # Generate doc file for "README.Lexmark-Maintenance"
-cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.Lexmark-Maintenance
+cat << EOF > %{_builddir}/%{name}-%{mainversion}/printer-filters/README.Lexmark-Maintenance
 
 Lexmark Printer Maintenance Tools
 ---------------------------------
@@ -480,7 +480,7 @@ programs to create this.
 EOF
 
 # Load menu icon
-bzcat %{SOURCE61} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/printutils.png
+bzcat %{SOURCE61} > %{_builddir}/%{name}-%{mainversion}/printer-filters/printutils.png
 
 # HP DeskJet PPA printers
 %setup -q -T -D -a 62 -n %{name}-%{mainversion}/printer-filters
@@ -551,12 +551,12 @@ mv oki4daemon oki4daemon.pre
 sed "s/setlogsock('unix');/setlogsock('inet');/" oki4daemon.pre | sed "s:/usr/local/sbin/oki4drv:/usr/bin/oki4drv:" > oki4daemon
 cd ../..
 # Mandrivized startup script for the daemon
-bzcat %{SOURCE67} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/oki4daemon
+bzcat %{SOURCE67} > %{_builddir}/%{name}-%{mainversion}/printer-filters/oki4daemon
 %if 0
 # Installer for a CUPS queue for an OKI winprinter
-bzcat %{SOURCE68} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/oki4w_install
+bzcat %{SOURCE68} > %{_builddir}/%{name}-%{mainversion}/printer-filters/oki4w_install
 # Generate doc file for "README.OKI-Winprinters"
-cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.OKI-Winprinters
+cat << EOF > %{_builddir}/%{name}-%{mainversion}/printer-filters/README.OKI-Winprinters
 
 Driver for the OKI 4w and compatible winprinters
 ------------------------------------------------
@@ -739,7 +739,7 @@ export RPM_OPT_FLAGS="`echo %optflags |sed -e 's/-O3/-g/' |sed -e 's/-O2/-g/'`"
 
 ##### PRINTER FILTERS AND OTHER STUFF
 
-cd $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
+cd %{_builddir}/%{name}-%{mainversion}/printer-filters
 
 # Apple StyleWriter
 cd stylewriter
@@ -1115,7 +1115,7 @@ install -d %{buildroot}%{_datadir}/foomatic/db/source/opt
 
 ##### PRINTER FILTERS AND OTHER STUFF
 
-cd $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
+cd %{_builddir}/%{name}-%{mainversion}/printer-filters
 
 # Apple StyleWriter
 cd stylewriter
