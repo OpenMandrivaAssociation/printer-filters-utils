@@ -1295,8 +1295,8 @@ install -m 644 printutils.png %{buildroot}%{_datadir}/icons/locolor/16x16/apps/
 %endif
 
 %if %mdkversion >= 200700
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-mtink.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-mtink.desktop << EOF
 [Desktop Entry]
 Name=Mtink - Epson Inkjet Printer Tools
 Comment=Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)
