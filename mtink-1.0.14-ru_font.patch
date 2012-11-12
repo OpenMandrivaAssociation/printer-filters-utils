@@ -1,0 +1,30 @@
+--- printer-filters-utils-2007/printer-filters/mtink-1.0.14/utils/Mtink.Ru.font	2007-01-31 15:53:12.000000000 -0200
++++ printer-filters-utils-2007/printer-filters/mtink-1.0.14/utils/Mtink.Ru	2007-01-31 15:53:41.000000000 -0200
+@@ -33,9 +33,9 @@
+ ! umgebrochen. Это sollte vor allem bei mehrzeiligen Texten die uebersicht
+ ! bezueglich Formatierung verbessern.
+ 
+-EpsonUtil.Ru*title_LB.fontList: *-urw palladio l-bold-r-normal-*-*-*-*-*-*-*-koi8-ru
+-EpsonUtil.Ru*fontList:          *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-ru
+-*Ru.tooltip_label.fontList:     *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-ru
++EpsonUtil.Ru*title_LB.fontList: *-urw palladio l-bold-r-normal-*-*-*-*-*-*-*-koi8-r
++EpsonUtil.Ru*fontList:          *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-r
++*Ru.tooltip_label.fontList:     *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-r
+ EpsonUtil.Ru*unknown: не известен
+ 
+ ! Die Version wird beim Erstellen der C-Datei ersetzt.
+--- printer-filters-utils-2007/printer-filters/mtink-1.0.14/mainSrc/resource.c.font	2007-01-31 15:53:24.000000000 -0200
++++ printer-filters-utils-2007/printer-filters/mtink-1.0.14/mainSrc/resource.c	2007-01-31 15:53:46.000000000 -0200
+@@ -2809,9 +2809,9 @@
+ 
+ */
+ #endif
+-   "EpsonUtil.Ru*title_LB.fontList: *-urw palladio l-bold-r-normal-*-*-*-*-*-*-*-koi8-ru",
+-   "EpsonUtil.Ru*fontList:          *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-ru",
+-   "*Ru.tooltip_label.fontList:     *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-ru",
++   "EpsonUtil.Ru*title_LB.fontList: *-urw palladio l-bold-r-normal-*-*-*-*-*-*-*-koi8-r",
++   "EpsonUtil.Ru*fontList:          *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-r",
++   "*Ru.tooltip_label.fontList:     *-urw palladio l-*-r-normal-*-*-*-*-*-*-*-koi8-r",
+    "EpsonUtil.Ru*unknown: не известен",
+ 
+ #if 0

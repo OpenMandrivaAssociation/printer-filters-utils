@@ -1,0 +1,10 @@
+--- ppmtocpva-1.0/ppmtocpva.c.includes	2001-08-04 17:22:24.000000000 -0400
++++ ppmtocpva-1.0/ppmtocpva.c	2005-02-09 06:53:12.044956214 -0500
+@@ -17,6 +17,7 @@
+ #include <unistd.h>
+ #include <math.h>
+ #include <assert.h>
++#include <string.h>
+ #include <pgm.h>
+ #include <ppm.h>
+ 

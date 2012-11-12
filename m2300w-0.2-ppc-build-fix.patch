@@ -1,0 +1,14 @@
+--- m2300w-0.2/configure.in.bak	2004-06-27 21:00:24.000000000 +0200
++++ m2300w-0.2/configure.in	2004-08-01 03:23:43.642882628 +0200
+@@ -41,6 +41,11 @@
+ AC_PROG_LN_S
+ AC_PROG_MAKE_SET
+ 
++AC_CHECK_FUNCS([floor])
++if test $ac_cv_func_floor = no; then
++  AC_CHECK_LIB(m, floor, [LIBS="$LIBS -lm"])
++fi
++
+ AC_PATH_PROG(GZIP,gzip,,[/usr/bin:/bin:/usr/local/bin:/opt/bin:$PATH])
+ if test -z "$GZIP"; then
+     echo "Could not locate gzip"

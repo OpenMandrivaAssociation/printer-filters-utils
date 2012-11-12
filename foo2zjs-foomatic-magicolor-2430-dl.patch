@@ -1,0 +1,136 @@
+--- db/source/driver/foo2zjs.xml.orig	2005-02-12 21:29:55.142180160 +0100
++++ db/source/driver/foo2zjs.xml	2005-02-12 21:30:49.525912576 +0100
+@@ -1,6 +1,6 @@
+ <driver id="driver/foo2zjs">
+     <name>foo2zjs</name>
+-    <url>http://home.mn.rr.com/richardsons/foo2zjs/</url>
++    <url>http://foo2zjs.rkkda.com/</url>
+     <execution>
+ 	<filter />
+ 	<prototype>foo2zjs-wrapper %A</prototype>
+@@ -9,6 +9,8 @@
+ 
+ 	This is a driver developed for the Minolta magicolor 2300 DL
+ 	network color laser printer.
++
++        &lt;p&gt;
+ 	
+ 	It is possible that this driver will also work for the HP LaserJet
+ 	1000 and other Zenographics-based printers, but the author cannot
+@@ -16,6 +18,7 @@
+ 
+     </en> </comments>
+     <printers>
++	<printer><id>printer/Minolta-magicolor_2430_DL</id></printer>
+ 	<printer><id>printer/Minolta-magicolor_2300_DL</id></printer>
+ 	<printer><id>printer/Minolta-magicolor_2200_DL</id></printer>
+ 	<printer><id>printer/Minolta-Color_PageWorks_Pro_L</id></printer>
+--- db/source/opt/foo2zjs-InputSlot.xml.orig	2005-02-12 21:30:24.156769272 +0100
++++ db/source/opt/foo2zjs-InputSlot.xml	2005-02-12 21:30:49.510914856 +0100
+@@ -30,6 +30,9 @@
+ 		    <printer>Minolta-magicolor_2300_DL</printer>
+ 		</constraint>
+ 		<constraint sense="false">
++		    <printer>Minolta-magicolor_2430_DL</printer>
++		</constraint>
++		<constraint sense="false">
+ 		    <printer>Minolta-Color_PageWorks_Pro_L</printer>
+ 		</constraint>
+ 	    </constraints>
+@@ -48,11 +51,14 @@
+ 		<constraint sense="true">
+ 		    <printer>Minolta-magicolor_2300_DL</printer>
+ 		</constraint>
++		<constraint sense="true">
++		    <printer>Minolta-magicolor_2430_DL</printer>
++		</constraint>
+ 	    </constraints>
+ 	</enum_val>
+ 	<enum_val id="ev/foo2zjs-InputSlot-1-PageWorks">
+ 	    <ev_longname> <en>Tray 1</en> </ev_longname>
+-	    <ev_shortname> <en>Tray 1</en> </ev_shortname>
++	    <ev_shortname> <en>Tray1</en> </ev_shortname>
+ 	    <ev_driverval>1</ev_driverval>
+ 	    <constraints>
+ 		<constraint sense="false">
+@@ -75,6 +81,9 @@
+ 		    <printer>Minolta-magicolor_2300_DL</printer>
+ 		</constraint>
+ 		<constraint sense="false">
++		    <printer>Minolta-magicolor_2430_DL</printer>
++		</constraint>
++		<constraint sense="false">
+ 		    <printer>Minolta-Color_PageWorks_Pro_L</printer>
+ 		</constraint>
+ 	    </constraints>
+@@ -104,6 +113,9 @@
+ 		    <printer>Minolta-magicolor_2300_DL</printer>
+ 		</constraint>
+ 		<constraint sense="false">
++		    <printer>Minolta-magicolor_2430_DL</printer>
++		</constraint>
++		<constraint sense="false">
+ 		    <printer>Minolta-Color_PageWorks_Pro_L</printer>
+ 		</constraint>
+ 	    </constraints>
+@@ -119,11 +131,14 @@
+ 		<constraint sense="true">
+ 		    <printer>Minolta-magicolor_2300_DL</printer>
+ 		</constraint>
++		<constraint sense="true">
++		    <printer>Minolta-magicolor_2430_DL</printer>
++		</constraint>
+ 	    </constraints>
+ 	</enum_val>
+ 	<enum_val id="ev/foo2zjs-InputSlot-3-PageWorks">
+ 	    <ev_longname> <en>Tray 2</en> </ev_longname>
+-	    <ev_shortname> <en>Tray 2</en> </ev_shortname>
++	    <ev_shortname> <en>Tray2</en> </ev_shortname>
+ 	    <ev_driverval>3</ev_driverval>
+ 	    <constraints>
+ 		<constraint sense="false">
+@@ -151,6 +166,9 @@
+ 		    <printer>Minolta-magicolor_2300_DL</printer>
+ 		</constraint>
+ 		<constraint sense="false">
++		    <printer>Minolta-magicolor_2430_DL</printer>
++		</constraint>
++		<constraint sense="false">
+ 		    <printer>Minolta-Color_PageWorks_Pro_L</printer>
+ 		</constraint>
+ 	    </constraints>
+--- db/source/opt/foo2zjs-ICM.xml.orig	2005-02-12 21:30:33.191395800 +0100
++++ db/source/opt/foo2zjs-ICM.xml	2005-02-12 21:30:49.524912728 +0100
+@@ -22,6 +22,12 @@
+ 	</constraint>
+ 	<constraint sense="true">
+ 	    <make>Minolta</make>
++	    <model>magicolor 2430 DL</model>
++	    <driver>foo2zjs</driver>
++	    <arg_defval>ev/foo2zjs-ICM-DL2312</arg_defval>
++	</constraint>
++	<constraint sense="true">
++	    <make>Minolta</make>
+ 	    <model>magicolor 2300 DL</model>
+ 	    <driver>foo2zjs</driver>
+ 	    <arg_defval>ev/foo2zjs-ICM-DL2312</arg_defval>
+@@ -53,6 +59,9 @@
+ 		    <driver>foo2zjs</driver>
+ 	        </constraint>
+ 	        <constraint sense="true">
++	    	    <printer>Minolta-magicolor_2430_DL</printer>
++	        </constraint>
++	        <constraint sense="true">
+ 	    	    <printer>Minolta-magicolor_2300_DL</printer>
+ 	        </constraint>
+ 	    </constraints>
+@@ -68,6 +77,9 @@
+ 		    <driver>foo2zjs</driver>
+ 	        </constraint>
+ 	        <constraint sense="true">
++	    	    <printer>Minolta-magicolor_2430_DL</printer>
++	        </constraint>
++	        <constraint sense="true">
+ 	    	    <printer>Minolta-magicolor_2300_DL</printer>
+ 	        </constraint>
+ 	    </constraints>
