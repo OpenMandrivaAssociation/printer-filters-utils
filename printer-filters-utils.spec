@@ -1,5 +1,5 @@
 %define mainversion 2008
-%define mainrelease %mkrel 5
+%define mainrelease 9
 
 %define debug 0
 
@@ -23,17 +23,12 @@ URL:		http://www.linuxprinting.org/
 ##### PRINTER FILTERS/UTILS BUILDREQUIRES
 
 BuildRequires:	autoconf, libtiff-devel, libijs-devel
-BuildRequires:	libjbig-devel, libusb-devel, libgmp-devel
+BuildRequires:	jbig-devel, libusb-devel, gmp-devel
 BuildRequires:	lesstif-devel, automake1.4, gimp-devel
 BuildRequires:	libnetpbm-devel
 BuildRequires:	gtk2-devel
-#BuildRequires:	liblcms-devel
 BuildRequires:  ghostscript
-%ifarch x86_64
-BuildRequires:	cups-common >= 1.2.0-0.5361.0mdk
-%else
 BuildRequires:	cups-common
-%endif
 
 # automake 1.4 is needed for z42tool
 
@@ -223,11 +218,6 @@ Patch101:	ppmtocpva-1.0-netpbm.patch
 Patch102:	ppmtomd-1.3-netpbm.patch
 
 
-
-##### BUILD ROOT
-
-BuildRoot:	%_tmppath/%name-%version-%release-root
-
 ##### PACKAGE DESCRIPTIONS
 
 ##### PRINTER FILTERS
@@ -240,13 +230,10 @@ Requires(post):	rpm-helper
 Requires(preun):rpm-helper
 # psutils, unzip, and mscompress needed by the foo2zjs driver
 Requires:	psutils, unzip
-%if %mdkversion >= 200700
 Requires:	mscompress
-%endif
 # "convert" needed by "pegg"
 Requires:	imagemagick
-Conflicts:	foomatic-db <= 3.0.1 cups-drivers < 2006
-Conflicts:	printer-utils <= 2006-11mdk
+Conflicts:	foomatic-db <= 3.0.1
 
 # <mrl> Requires for the packages that are obsoleting this one.
 Requires:	c2050
@@ -299,21 +286,15 @@ Conflicts:	ghostscript < 8.15
 
 # <mrl> Requires for the packages that are obsoleting this one.
 Requires:	lm1100
-Requires:	lxcontrol
 Requires:	mtink
 Requires:	poster
 Requires:	printer-utils
-Requires:	z42tool
 
 %package -n cups-drivers
 Summary:	Special CUPS printer drivers
 Requires: 	cups >= 1.1, ghostscript >= 7.05
 # "convert" needed by "pegg"
 Requires:	imagemagick
-Conflicts:	printer-utils <= 1.0-142mdk printer-filters < 2006
-%ifarch x86_64
-Conflicts:	cups < 1.2.0-0.5361.0mdk
-%endif
 Group: 		Publishing
 
 # <mrl> Requires for the packages that are obsoleting this one.
@@ -367,10 +348,10 @@ echo > printer-filters/debugfiles.list
 exit 0
 
 # remove old directory
-rm -rf %{_builddir}/%{name}-%{mainversion}
-mkdir %{_builddir}/%{name}-%{mainversion}
+rm -rf $RPM_BUILD_DIR/%{name}-%{mainversion}
+mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}
 
-mkdir %{_builddir}/%{name}-%{mainversion}/printer-filters
+mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
 
 # Apple StyleWriter
 %setup -q -T -D -a 50 -n %{name}-%{mainversion}/printer-filters
@@ -408,7 +389,7 @@ cd ..
 # Lexmark Z11
 %setup -q -T -D -a 56 -n %{name}-%{mainversion}/printer-filters
 #setup -q -T -D -a 56 -n %{name}-%{mainversion}/printer-filters
-#bzcat %SOURCE72 > %{_builddir}/%{name}-%{mainversion}/printer-filters/LexZ11-distro/cZ11.c
+#bzcat %SOURCE72 > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/LexZ11-distro/cZ11.c
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lx11*/makefile
 
 # Printer Utility Program
@@ -417,16 +398,16 @@ perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lx11*/makefile
 # Lexmark printer maintenance
 %setup -q -T -D -a 58 -n %{name}-%{mainversion}/printer-filters
 %setup -q -T -D -a 59 -n %{name}-%{mainversion}/printer-filters
-bzcat %{SOURCE60} > %{_builddir}/%{name}-%{mainversion}/printer-filters/changecartridge
-#cp %{_builddir}/%{name}-%{mainversion}/printer-filters/pup_1.1/README \
-#	%{_builddir}/%{name}-%{mainversion}/printer-filters/README.LexmarkOptra40_45
-mv %{_builddir}/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark \
-	%{_builddir}/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark5xxx_7xxx
-mv %{_builddir}/%{name}-%{mainversion}/printer-filters/lm1100maint/README \
-	%{_builddir}/%{name}-%{mainversion}/printer-filters/lm1100maint/README.Lexmark1xxx
+bzcat %{SOURCE60} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/changecartridge
+#cp $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/pup_1.1/README \
+#	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.LexmarkOptra40_45
+mv $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark \
+	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark5xxx_7xxx
+mv $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lm1100maint/README \
+	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lm1100maint/README.Lexmark1xxx
 
 # Generate doc file for "changecartridge"
-cat << EOF > %{_builddir}/%{name}-%{mainversion}/printer-filters/README.changecartridge
+cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.changecartridge
 
 changecartridge - a program for changing the ink cartridges
                   in the Lexmark 5xxx and 7xxx printers.
@@ -450,7 +431,7 @@ variable in /usr/bin/changecartridge.
 
 EOF
 # Generate doc file for "README.Lexmark-Maintenance"
-cat << EOF > %{_builddir}/%{name}-%{mainversion}/printer-filters/README.Lexmark-Maintenance
+cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.Lexmark-Maintenance
 
 Lexmark Printer Maintenance Tools
 ---------------------------------
@@ -480,7 +461,7 @@ programs to create this.
 EOF
 
 # Load menu icon
-bzcat %{SOURCE61} > %{_builddir}/%{name}-%{mainversion}/printer-filters/printutils.png
+bzcat %{SOURCE61} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/printutils.png
 
 # HP DeskJet PPA printers
 %setup -q -T -D -a 62 -n %{name}-%{mainversion}/printer-filters
@@ -551,12 +532,12 @@ mv oki4daemon oki4daemon.pre
 sed "s/setlogsock('unix');/setlogsock('inet');/" oki4daemon.pre | sed "s:/usr/local/sbin/oki4drv:/usr/bin/oki4drv:" > oki4daemon
 cd ../..
 # Mandrivized startup script for the daemon
-bzcat %{SOURCE67} > %{_builddir}/%{name}-%{mainversion}/printer-filters/oki4daemon
+bzcat %{SOURCE67} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/oki4daemon
 %if 0
 # Installer for a CUPS queue for an OKI winprinter
-bzcat %{SOURCE68} > %{_builddir}/%{name}-%{mainversion}/printer-filters/oki4w_install
+bzcat %{SOURCE68} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/oki4w_install
 # Generate doc file for "README.OKI-Winprinters"
-cat << EOF > %{_builddir}/%{name}-%{mainversion}/printer-filters/README.OKI-Winprinters
+cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.OKI-Winprinters
 
 Driver for the OKI 4w and compatible winprinters
 ------------------------------------------------
@@ -739,7 +720,7 @@ export RPM_OPT_FLAGS="`echo %optflags |sed -e 's/-O3/-g/' |sed -e 's/-O2/-g/'`"
 
 ##### PRINTER FILTERS AND OTHER STUFF
 
-cd %{_builddir}/%{name}-%{mainversion}/printer-filters
+cd $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
 
 # Apple StyleWriter
 cd stylewriter
@@ -1115,7 +1096,7 @@ install -d %{buildroot}%{_datadir}/foomatic/db/source/opt
 
 ##### PRINTER FILTERS AND OTHER STUFF
 
-cd %{_builddir}/%{name}-%{mainversion}/printer-filters
+cd $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
 
 # Apple StyleWriter
 cd stylewriter
@@ -1295,8 +1276,8 @@ install -m 644 printutils.png %{buildroot}%{_datadir}/icons/locolor/16x16/apps/
 %endif
 
 %if %mdkversion >= 200700
-mkdir -p %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/mandriva-mtink.desktop << EOF
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
+cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-mtink.desktop << EOF
 [Desktop Entry]
 Name=Mtink - Epson Inkjet Printer Tools
 Comment=Epson inkjet printer maintenance (Head cleaning and alignment, ink level display, cartridge change, ...)
@@ -1812,4 +1793,275 @@ chmod -R u+w %{buildroot}%{_docdir}
 %clean
 rm -rf %{buildroot}
 
+
+
+
+%changelog
+* Tue May 10 2011 Funda Wang <fwang@mandriva.org> 2008-5mdv2011.0
++ Revision: 673264
+- rebuild
+
+* Sun Oct 04 2009 Funda Wang <fwang@mandriva.org> 2008-4mdv2011.0
++ Revision: 453319
+- fix BR
+
+* Thu Dec 11 2008 Oden Eriksson <oeriksson@mandriva.com> 2008-4mdv2009.1
++ Revision: 312958
+- lowercase ImageMagick
+
+* Wed Jun 18 2008 Thierry Vignaud <tv@mandriva.org> 2008-4mdv2009.0
++ Revision: 225067
+- rebuild
+
+* Wed Mar 05 2008 Oden Eriksson <oeriksson@mandriva.com> 2008-3mdv2008.1
++ Revision: 179285
+- rebuild
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - drop old menu
+    - kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Thu Sep 13 2007 Marcelo Ricardo Leitner <mrl@mandriva.com> 2008-2mdv2008.0
++ Revision: 85022
+- Removed tons of provides to drivers that were bundled on this package. Let
+  the splitted packages provide themselves.
+
+* Mon Sep 03 2007 Marcelo Ricardo Leitner <mrl@mandriva.com> 2008-1mdv2008.0
++ Revision: 78566
+- First step on this package towards splitting. It will requires all the ones that were
+  splitted out and ship no files at all.
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill desktop-file-validate's 'warning: key "Encoding" in group "Desktop Entry" is deprecated'
+
+* Fri Jul 20 2007 Adam Williamson <awilliamson@mandriva.org> 2007-10mdv2008.0
++ Revision: 53976
+- rebuild against new lesstif
+- stop using hokey internal %%mdv2007 version check, use standard %%mdkversion
+- clean up menu entry creation appropriately for all releases
+
+* Thu May 03 2007 Herton Ronaldo Krzesinski <herton@mandriva.com.br> 2007-9mdv2008.0
++ Revision: 22008
+- Added missing BuildRequires for gtk2-devel.
+- Use a smaller description/name for Mtink menu entries (Closes:
+  #30542).
+
+
+* Thu Mar 15 2007 Olivier Blin <oblin@mandriva.com> 2007-8mdv2007.1
++ Revision: 144561
+- move most doc in printer-filters-doc
+
+  + Marcelo Ricardo Leitner <mrl@mandriva.com>
+    - Do not request koi8-ru, but koi8-r instead. Closes: #25315
+    - Updated mtink to 1.0.14
+
+* Mon Jan 29 2007 Olivier Blin <oblin@mandriva.com> 2007-7mdv2007.1
++ Revision: 115161
+- rebuild for new libintl
+- Import printer-filters-utils
+
+* Thu Sep 07 2006 Till Kamppeter <till@mandriva.com> 2007-6mdv2007.0
+- Added "splix" driver for Samsung SPL2 laser printers.
+- Updated MTink to version 1.0.13a.
+- MTink: Removed patches 78 and 103 (merged upstream).
+- 64-bit fix for MTink build system.
+
+* Sat Aug 12 2006 Till Kamppeter <till@mandriva.com> 2007-5mdv2007.0
+- Added "Requires: mscompress" to printer-filters, as it is needed
+  by the foo2zjs driver.
+
+* Fri Aug 11 2006 Till Kamppeter <till@mandriva.com> 2007-4mdv2007.0
+- Removed the /usr/bin/msexpand which comes with the "foo2zjs" driver.
+  There is a better msexpand in the mscompress package from the contribs
+  (or from ftp://ftp.penguin.cz/pub/users/mhi/mscompress/).
+
+* Sat Aug 05 2006 Till Kamppeter <till@mandriva.com> 2007-3mdv2007.0
+- Corrected directories for the ICM color profiles of the "foo2zjs" and
+  "foo2hp" drivers.
+
+* Sat Aug 05 2006 Olivier Blin <blino@mandriva.com> 2007-2mdv2007.0
+- fix hplj10xx.rules (make them run by not renaming with the exact same name)
+
+* Fri Jul 28 2006 Till Kamppeter <till@mandriva.com> 2007-1mdv2007.0
+- Added "foo2kyo" driver for the Kyocera FS-1016MFP GDI printer (and
+  perhaps other Kyocera GDI printers).
+- Made XDG menues conditional, so that this package can be built as update
+  for older Mandriva releases.
+
+* Thu Jul 27 2006 Olivier Blin <blino@mandriva.com> 2006-25mdv2007.0
+- mtink: fix Xorg prefix on x86_64
+- XDG menu
+
+* Tue Jul 11 2006 Till Kamppeter <till@mandriva.com> 2006-24mdv2007.0
+- Removed PUP (Printer Utility Program) to get rid of the GTK 1.x
+  dependency (bugs 21496 and 23606)
+
+* Fri Jun 09 2006 Till Kamppeter <till@mandriva.com> 2006-23mdv2007.0
+- Uncompressed all the patches, to make it easier to put this
+  package into a subversion repository.
+
+* Fri Jun 09 2006 Till Kamppeter <till@mandriva.com> 2006-22mdv2007.0
+- Corrected Foomatic data of new "foo2zjs" and "foo2hp" drivers, so
+  that both Konica Minolta magicolor 2430 DL and Minolta magicolor
+  2430 DL will be set up correctly.
+
+* Wed Jun 07 2006 Till Kamppeter <till@mandriva.com> 2006-21mdv2007.0
+- Corrected Foomatic data of new "foo2zjs" and "foo2hp" drivers, so
+  that support for Konica Minolta magicolor DL series works.
+
+* Wed Jun 07 2006 Till Kamppeter <till@mandriva.com> 2006-20mdv2007.0
+- Updated "foo2zjs" and "foo2hp" drivers (Support for newest printer
+  models: HP LaserJet 1018, 1022, Color LaserJet 1600).
+- Replaced patch 105 by perl magic, so that the patch does not need to 
+  be remade if new printers are added.
+
+* Wed May 31 2006 Olivier Blin <oblin@mandriva.com> 2006-19mdv2007.0
+- really apply '=' fixes in hplj10xx udev rules
+
+* Thu May 25 2006 Olivier Blin <oblin@mandriva.com> 2006-18mdk
+- fix more '=' matches in udev rules (John Campbell, #22608)
+
+* Wed May 24 2006 Till Kamppeter <till@mandriva.com> 2006-17mdk
+- Removed extra qualifications '<class>::<member>' on class members, to make
+  code compiling with gcc 4.1.1 (printer driver "lm1100").
+
+* Wed May 24 2006 Olivier Blin <oblin@mandriva.com> 2006-16mdk
+- Patch105: use == to match KERNEL variables in udev rules (#22608)
+
+* Fri May 12 2006 Till Kamppeter <till@mandriva.com> 2006-15mdk
+- Added free Konica Minolta CUPS drivers for magicolor 5430DL and
+  5440DL.
+- Updated driver for magicolor 2430DL.
+
+* Wed Apr 05 2006 Till Kamppeter <till@mandriva.com> 2006-14mdk
+- Moved CUPS filter/backend directories from /usr/lib64/cups/... to
+  /usr/lib/cups/... on 64-bit systems.
+
+* Thu Mar 30 2006 Till Kamppeter <till@mandriva.com> 2006-13mdk
+Added "ptouch" driver for Brother P-Touch label printers.
+
+* Tue Mar 07 2006 Till Kamppeter <till@mandriva.com> 2006-12mdk
+- Updated "foo2zjs" driver to newest version, added "foo2hp" driver
+  (New models supported: HP LaserJet 1020, HP Color LaserJet 2600).
+
+* Fri Feb 17 2006 Till Kamppeter <till@mandriva.com> 2006-11mdk
+- Updated "lz11" driver to version V2-1.2.
+
+* Thu Jan 05 2006 Till Kamppeter <till@mandriva.com> 2006-10mdk
+- SECURITY FIX: Update for local root vulnerability in MTink (patch 103, 
+  bug 20038).
+- Updated "min12xxw" driver to version 0.0.9 (Support for Minolta PagePro
+  1400W).
+- Fixed Minolta's magicolor 2430 DL driver to compile with CUPS 1.2.x
+  (it came with its own CUPS 1.1.x header files).
+- Rebuilt with CUPS DDK 1.1 for CUPS 1.2.
+- %%mkrel introduced.
+
+* Fri Oct 28 2005 Till Kamppeter <till@mandriva.com> 2006-9mdk
+- Updated "m2300w" driver to version 0.51 (Added support for the
+  Konika-Minolta magicolor 2400W).
+- Updated "ppmtomd" driver to version 1.5 (color correction/ink
+  consumption problem fixed).
+
+* Tue Oct 18 2005 Till Kamppeter <till@mandriva.com> 2006-8mdk
+- Added chkconfig support to the /etc/init.d/mtink startup script, so
+  that the preuninstall script of the package works (bug 19309).
+- Updated "m2300w" driver to version 0.4.
+
+* Tue Aug 30 2005 Till Kamppeter <till@mandriva.com> 2006-7mdk
+- Fixed file list, CUPS PPDs for "lbp660" are only available with x86
+  architecture. Now this package should rebuild on all architectures 
+  again.
+- Added PPD file for Canon LBP-1120 (with "capt" driver).
+
+* Mon Aug 29 2005 Till Kamppeter <till@mandriva.com> 2006-6mdk
+- Added improved test page for alignmargins.
+
+* Sun Aug 28 2005 Olivier Blin <oblin@mandriva.com> 2006-5mdk
+- convert hotplug usermap to udev rule and get rid off agent symlink
+- move PreReq to Requires(post)
+- add missing rpm-helper Requires(post,preun)
+
+* Mon Aug 15 2005 Till Kamppeter <till@mandriva.com> 2006-4mdk
+- Added "Conflicts: cups-drivers < 2006" to printer-filters.
+
+* Mon Aug 15 2005 Till Kamppeter <till@mandriva.com> 2006-3mdk
+- Updated "min12xxw" driver to version 0.0.8 (64-bit fixes).
+
+* Sun Aug 14 2005 Till Kamppeter <till@mandriva.com> 2006-2mdk
+- Updated "lxx74" driver to version 0.8.4.1.
+- Generated PPDs for all printers the "lxx74" driver is supposed to support
+  according to its home page.
+
+* Fri Aug 05 2005 Till Kamppeter <till@mandriva.com> 2006-1mdk
+- Added "capt" driver for Canon CAPT printers (LBP-810, LBP-1120).
+- Updated "lbp660" driver to version 0.2.4.
+- Fixed "lpstyl" driver (Apple StyleWrite) to compile with gcc 4.x 
+  (patch 1040).
+- Updated MTink to version 1.0.9.
+- Fixed MTink to compile with gcc 4.x (patch 78).
+- Updated "lz11" driver to version V2-1.0.1.
+- Updated "drv_z42" driver to version 0.4.3.
+- Updated "foo2zjs" driver to newest state.
+- Removed patches 1050 and 1051 from "foo2zjs" driver, they are merged
+  upstream.
+- Updated "m2300w" driver to version 0.3.
+- Updated "min12xxw" driver to version 0.0.7.
+- Updated "pegg" driver to version 0.23.
+- Added "pegg_el" driver.
+- Updated "xbm2crw" to version 0.4.
+- Updated "cups2pegg" to version 0.21a.
+- Added a delay to the HP LaserJet 1000 firmware loader "hp1000fw",
+  otherwise the firmware is tried to be uploaded before /dev/usb/lp? is
+  created.
+- Some clean-up.
+
+* Fri Mar 18 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.11mdk
+- Added "Conflicts: foomatic-db <= 3.0.1" to printer-filters, so that
+  updating from 10.1 to 10.2 works correctly (bug 14710).
+
+* Mon Mar 07 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.10mdk
+- Rebuilt to replace lost packages during server crash.
+
+* Tue Mar 01 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.9mdk
+- Removed asterisks from group names in the PPD files for the Minolta
+  magicolor 2300/2430 DL.
+
+* Mon Feb 28 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.8mdk
+- Updated mtink to version 1.0.8.
+- Switched mtink and ttink to SUID root as they do not work otherwise
+  (bug 14078).
+- Removed oki4w_install script. Primarily the "oki4w" GhostScript driver
+  should be used for this class of printers. "oki4drv" can be set up with
+  printerdrake (bug 13952).
+- Removed menu entries for programs which require root privileges
+  (bugs 13951, 13958).
+
+* Sun Feb 20 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.7mdk
+- Added Minolta's free driver for the Minolta magicolor 2430 DL and an extra
+  PPD file to also use this driver with the Minolta magicolor 2300 DL
+
+* Sat Feb 12 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.6mdk
+- Added support for Minolta magicolor 2430 by "foo2zjs".
+- Fixed foomatic data of "foo2zjs".
+
+* Fri Feb 11 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.5mdk
+- Let driver's Foomatic data get installed if included with driver.
+
+* Fri Feb 11 2005 Christiaan Welvaart <cjw@daneel.dyndns.org> 10.2-0.4mdk
+- add BuildRequires: libgtk+-devel
+
+* Thu Feb 10 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.3mdk
+- Updated to epsoneplijs 0.4.0 final (Epson EPL-L series driver).
+- Added "BuildRequires:	libnetpbm-devel".
+
+* Wed Feb 09 2005 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 10.2-0.2mdk
+- fixes for new netpbm
+
+* Thu Feb 03 2005 Till Kamppeter <till@mandrakesoft.com> 10.2-0.1mdk
+- Separated printer-filters and printer-utils from former printer-drivers 
+  source RPM.
 
