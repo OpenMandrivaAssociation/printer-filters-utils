@@ -3,6 +3,8 @@
 
 %define debug 0
 
+%define debug_package %{nil}
+
 ##### RPM PROBLEM WORKAROUNDS
 
 # Suppress automatically generated Requires for Perl libraries.
@@ -25,7 +27,7 @@ URL:		http://www.linuxprinting.org/
 BuildRequires:	autoconf, libtiff-devel, libijs-devel
 BuildRequires:	jbig-devel, libusb-devel, gmp-devel
 BuildRequires:	lesstif-devel, automake1.4, gimp-devel
-BuildRequires:	libnetpbm-devel
+BuildRequires:	netpbm-devel
 BuildRequires:	gtk2-devel
 BuildRequires:  ghostscript
 BuildRequires:	cups-common
