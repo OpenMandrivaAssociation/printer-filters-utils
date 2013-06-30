@@ -275,22 +275,22 @@ echo > printer-filters/debugfiles.list
 exit 0
 
 # remove old directory
-rm -rf $RPM_BUILD_DIR/%{name}-%{mainversion}
-mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}
+rm -rf $RPM_BUILD_DIR/%{name}-%{version}
+mkdir $RPM_BUILD_DIR/%{name}-%{version}
 
-mkdir $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
+mkdir $RPM_BUILD_DIR/%{name}-%{version}/printer-filters
 
 # Apple StyleWriter
-%setup -q -T -D -a 50 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 50 -n %{name}-%{version}/printer-filters
 cd stylewriter
 %patch1040 -p0
 cd ..
 
 # Canon CaPSL
-%setup -q -T -D -a 51 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 51 -n %{name}-%{version}/printer-filters
 
 # Lexmark 1100
-%setup -q -T -D -a 52 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 52 -n %{name}-%{version}/printer-filters
 # fix to make it compiling with gcc 2.96
 # Patch to make LM 1100 printer emulator script to work
 cd lm1100*
@@ -299,13 +299,13 @@ cd lm1100*
 cd ..
 
 # Lexmark 2070 colour
-%setup -q -T -D -a 53 -c -n %{name}-%{mainversion}/printer-filters/c2070-0.99
+%setup -q -T -D -a 53 -c -n %{name}-%{version}/printer-filters/c2070-0.99
 
 # Lexmark 2070 grayscale
-%setup -q -T -D -a 54 -c -n %{name}-%{mainversion}/printer-filters/Lexmark2070.latest
+%setup -q -T -D -a 54 -c -n %{name}-%{version}/printer-filters/Lexmark2070.latest
 
 # Lexmark 7xxx, 57xx, Z51
-%setup -q -T -D -a 55 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 55 -n %{name}-%{version}/printer-filters
 # Fix Makefile
 cd lexmark7000linux-990516
 sed "s/-o root -g root//" Makefile > Makefile.new
@@ -314,27 +314,27 @@ mv -f Makefile.new Makefile
 cd ..
 
 # Lexmark Z11
-%setup -q -T -D -a 56 -n %{name}-%{mainversion}/printer-filters
-#setup -q -T -D -a 56 -n %{name}-%{mainversion}/printer-filters
-#bzcat %SOURCE72 > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/LexZ11-distro/cZ11.c
+%setup -q -T -D -a 56 -n %{name}-%{version}/printer-filters
+#setup -q -T -D -a 56 -n %{name}-%{version}/printer-filters
+#bzcat %SOURCE72 > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/LexZ11-distro/cZ11.c
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lx11*/makefile
 
 # Printer Utility Program
-#setup -q -T -D -a 57 -n %{name}-%{mainversion}/printer-filters
+#setup -q -T -D -a 57 -n %{name}-%{version}/printer-filters
 
 # Lexmark printer maintenance
-%setup -q -T -D -a 58 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 59 -n %{name}-%{mainversion}/printer-filters
-bzcat %{SOURCE60} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/changecartridge
-#cp $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/pup_1.1/README \
-#	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.LexmarkOptra40_45
-mv $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark \
-	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lxcontrol/README.Lexmark5xxx_7xxx
-mv $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lm1100maint/README \
-	$RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/lm1100maint/README.Lexmark1xxx
+%setup -q -T -D -a 58 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 59 -n %{name}-%{version}/printer-filters
+bzcat %{SOURCE60} > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/changecartridge
+#cp $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/pup_1.1/README \
+#	$RPM_BUILD_DIR/%{name}-%{version}/printer-filters/README.LexmarkOptra40_45
+mv $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/lxcontrol/README.Lexmark \
+	$RPM_BUILD_DIR/%{name}-%{version}/printer-filters/lxcontrol/README.Lexmark5xxx_7xxx
+mv $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/lm1100maint/README \
+	$RPM_BUILD_DIR/%{name}-%{version}/printer-filters/lm1100maint/README.Lexmark1xxx
 
 # Generate doc file for "changecartridge"
-cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.changecartridge
+cat << EOF > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/README.changecartridge
 
 changecartridge - a program for changing the ink cartridges
                   in the Lexmark 5xxx and 7xxx printers.
@@ -358,7 +358,7 @@ variable in /usr/bin/changecartridge.
 
 EOF
 # Generate doc file for "README.Lexmark-Maintenance"
-cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.Lexmark-Maintenance
+cat << EOF > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/README.Lexmark-Maintenance
 
 Lexmark Printer Maintenance Tools
 ---------------------------------
@@ -388,10 +388,10 @@ programs to create this.
 EOF
 
 # Load menu icon
-bzcat %{SOURCE61} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/printutils.png
+bzcat %{SOURCE61} > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/printutils.png
 
 # HP DeskJet PPA printers
-%setup -q -T -D -a 62 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 62 -n %{name}-%{version}/printer-filters
 # remove "version ERROR" line from pnm2ppa.conf
 perl -n -i -e 'if ( !m/^\s*version\s*0\s*(|\#.*)$/ ) { print "$_";}' pnm2ppa-*/pnm2ppa.conf
 
@@ -436,17 +436,17 @@ EOF
 
 
 # pbm2ppa source
-%setup -q -T -D -a 63 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 63 -n %{name}-%{version}/printer-filters
 %patch52 -p0
 
 # Lexmark 2050
-%setup -q -T -D -a 64 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 64 -n %{name}-%{version}/printer-filters
 
 # Lexmark 2030
-%setup -q -T -D -a 65 -c -n %{name}-%{mainversion}/printer-filters/pbm2l2030
+%setup -q -T -D -a 65 -c -n %{name}-%{version}/printer-filters/pbm2l2030
 
 # Okipage 4w and compatible winprinters
-%setup -T -D -a 66 -n %{name}-%{mainversion}/printer-filters
+%setup -T -D -a 66 -n %{name}-%{version}/printer-filters
 cd oki4linux-2.0
 %patch54 -p1
 %patch55 -p1
@@ -459,12 +459,12 @@ mv oki4daemon oki4daemon.pre
 sed "s/setlogsock('unix');/setlogsock('inet');/" oki4daemon.pre | sed "s:/usr/local/sbin/oki4drv:/usr/bin/oki4drv:" > oki4daemon
 cd ../..
 # Mandrivized startup script for the daemon
-bzcat %{SOURCE67} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/oki4daemon
+bzcat %{SOURCE67} > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/oki4daemon
 %if 0
 # Installer for a CUPS queue for an OKI winprinter
-bzcat %{SOURCE68} > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/oki4w_install
+bzcat %{SOURCE68} > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/oki4w_install
 # Generate doc file for "README.OKI-Winprinters"
-cat << EOF > $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters/README.OKI-Winprinters
+cat << EOF > $RPM_BUILD_DIR/%{name}-%{version}/printer-filters/README.OKI-Winprinters
 
 Driver for the OKI 4w and compatible winprinters
 ------------------------------------------------
@@ -500,49 +500,49 @@ EOF
 %endif
 
 # CoStar and compatible label printers
-%setup -q -T -D -a 70 -c -n %{name}-%{mainversion}/printer-filters/pbm2lwxl
+%setup -q -T -D -a 70 -c -n %{name}-%{version}/printer-filters/pbm2lwxl
 
 # Citizen Printiva 600C
-%setup -q -T -D -a 69 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 69 -n %{name}-%{version}/printer-filters
 cd ppmtocpva-*
 %patch100 -p1
 %patch101 -p1
 cd ..
 
 # Samsung ML-85G and QL-85G winprinters
-%setup -q -T -D -a 71 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 71 -n %{name}-%{version}/printer-filters
 #patch58 -p0
 
 # Filter for the Lexmark Z42
-%setup -q -T -D -a 73 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 73 -n %{name}-%{version}/printer-filters
 
 # GhostScript wrapper for the Pentax PocketJet printers
-%setup -q -T -D -a 74 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 74 -n %{name}-%{version}/printer-filters
 
 # Unix driver for MicroDry Printers
-%setup -q -T -D -a 76 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 76 -n %{name}-%{version}/printer-filters
 cd ppmtomd-*
 %patch102 -p1
 cd ..
 
 # Mtink - Printer maintenance/ink monitoring for Epson inkjets
-%setup -q -T -D -a 77 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 77 -n %{name}-%{version}/printer-filters
 cd mtink-1*
 %patch70 -p3
 cd ..
 
 # Poster - Poster-printing on stndard sized paper 
-%setup -q -T -D -a 78 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 78 -n %{name}-%{version}/printer-filters
 
 # Driver for the HP LaserJet 1000
 bzcat %{SOURCE82} > pbmtozjs.c
 
 # Driver for Zenographics-based printers (Minolta magicolor DL series, HP
 # LaserJet 1000, 1005, 1018, 1020, 1022, Color LaserJet 1600, 2600)
-%setup -q -T -D -a 83 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 83 -n %{name}-%{version}/printer-filters
 cd foo2zjs*/foomatic-db
 rm -rf *
-%setup -q -T -D -a 830 -n %{name}-%{mainversion}/printer-filters/foo2zjs/foomatic-db
+%setup -q -T -D -a 830 -n %{name}-%{version}/printer-filters/foo2zjs/foomatic-db
 cd ../..
 # Fit udev rules to stricter syntax of new udev
 # (blino) don't try to rename the device,
@@ -551,33 +551,33 @@ cd ../..
 perl -p -i -e 's:(KERNEL|BUS|SYSFS.*?)=([^=]):$1==$2:g;s{SYMLINK=}{SYMLINK+=}g;s{(?:NAME|MODE)=.*?,\s*}{}g' foo2zjs*/hplj10xx.rules
 
 # Driver for Epson EPL "L" series
-%setup -q -T -D -a 84 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 84 -n %{name}-%{version}/printer-filters
 cd epsonepl*
 perl -p -i -e "s/-g -O2 -Wall -ansi -pedantic -Wmissing-prototypes/-fPIC/" Makefile.in
 #patch1001 -p1 -b .fPIC
 cd ..
 
 # Driver for Lexmark X125 (only printing)
-%setup -q -T -D -a 1000 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 1001 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1000 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 1001 -n %{name}-%{version}/printer-filters
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" drv_x125*/src/Makefile
 
 %ifarch %{ix86}
 # Driver for Canon LBP-460/660
-%setup -q -T -D -a 1010 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1010 -n %{name}-%{version}/printer-filters
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lbp660*/Makefile
 %endif
 
 # Driver for Canon LBP-810/1120
-%setup -q -T -D -a 1060 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1060 -n %{name}-%{version}/printer-filters
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" cast*/Makefile
 
 # Driver for Lexmark X74/X75
-%setup -q -T -D -a 1020 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1020 -n %{name}-%{version}/printer-filters
 perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" lxx74*/Makefile
 
 # Driver for Minolta magicolor 2300W
-%setup -q -T -D -a 1030 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1030 -n %{name}-%{version}/printer-filters
 cd m2300w*
 # Deactivate checks for installed Foomatic in "./configure"
 %patch1030 -p0
@@ -585,20 +585,20 @@ cd m2300w*
 cd ..
 
 # Driver for Minolta PagePro 12xxW, 13xxW, and 14xxW
-%setup -q -T -D -a 1035 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1035 -n %{name}-%{version}/printer-filters
 #perl -p -i -e "s/gcc/gcc $RPM_OPT_FLAGS/" min12xxw*/Makefile
 
 # Driver for Casio USB label printers
-%setup -q -T -D -a 1040 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 1041 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 1042 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 1043 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1040 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 1041 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 1042 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 1043 -n %{name}-%{version}/printer-filters
 
 # Drivers for the Konica Minolta magicolor DL series supplied by Konica
 # Minolta
-%setup -q -T -D -a 1050 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 1051 -n %{name}-%{mainversion}/printer-filters
-%setup -q -T -D -a 1052 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1050 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 1051 -n %{name}-%{version}/printer-filters
+%setup -q -T -D -a 1052 -n %{name}-%{version}/printer-filters
 # Fix copy of CUPS headers in kmlf.h
 perl -p -i -e 's:\bcups_strlcpy:_cups_strlcpy:g' magicolor????DL*/src/kmlf.h
 # Remove asterisks from group names in PPD file
@@ -611,14 +611,14 @@ done
 perl -p -i -e 's:(CUPS_SERVERBIN=)"\$libdir/cups":$1`cups-config --serverbin`:' magicolor????DL*/configure
 
 # Driver for Brother P-Touch label printers
-%setup -q -T -D -a 1070 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1070 -n %{name}-%{version}/printer-filters
 
 # Driver for Kyocera GDI printers: Kyocera FS-1016MFP
-%setup -q -T -D -a 1080 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1080 -n %{name}-%{version}/printer-filters
 perl -p -i -e 's/Kyocera-Mita-FS-1016/Kyocera-FS-1016/g' foo2kyo*/foomatic-db/driver/foo2kyo.xml
 
 # Driver for Samsung SPL2 printers
-%setup -q -T -D -a 1090 -n %{name}-%{mainversion}/printer-filters
+%setup -q -T -D -a 1090 -n %{name}-%{version}/printer-filters
 cd splix*
 %patch1060 -p1 -b .cups12
 cd ..
@@ -647,7 +647,7 @@ export RPM_OPT_FLAGS="`echo %optflags |sed -e 's/-O3/-g/' |sed -e 's/-O2/-g/'`"
 
 ##### PRINTER FILTERS AND OTHER STUFF
 
-cd $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
+cd $RPM_BUILD_DIR/%{name}-%{version}/printer-filters
 
 # Apple StyleWriter
 cd stylewriter
@@ -1023,7 +1023,7 @@ install -d %{buildroot}%{_datadir}/foomatic/db/source/opt
 
 ##### PRINTER FILTERS AND OTHER STUFF
 
-cd $RPM_BUILD_DIR/%{name}-%{mainversion}/printer-filters
+cd $RPM_BUILD_DIR/%{name}-%{version}/printer-filters
 
 # Apple StyleWriter
 cd stylewriter
@@ -1031,9 +1031,9 @@ cd stylewriter
 install -m 755 lpstyl %{buildroot}%{_bindir}
 # Documentation
 chmod -R a+rX *
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/AppleStyleWriter
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/AppleStyleWriter
 cp -ax scripts Makefile.atalk README* adsp.* printcap.* styl.ppd \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/AppleStyleWriter
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/AppleStyleWriter
 cd ..
 
 # Canon CaPSL
@@ -1041,9 +1041,9 @@ cd cjet089
 # Program files
 install -m 755 cjet %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CanonCaPSL
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CanonCaPSL
 cp -ax README INSTALL COPYING TODO ChangeLog samples \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CanonCaPSL
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CanonCaPSL
 cd ..
 
 # Lexmark 1100
@@ -1060,11 +1060,11 @@ install -m 0755 ps-to-lm1100.fpi %{buildroot}%{_libdir}/rhs/rhs-printfilters
 ln -s %{_bindir}/lm1100 \
 	%{buildroot}%{_libdir}/rhs/rhs-printfilters
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark1100
-install -m 0644 LICENSE %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark1100
-install -m 0644 README %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark1100
-install -m 0644 RELEASE.txt %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark1100
-install -m 0644 cmy.txt %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark1100
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark1100
+install -m 0644 LICENSE %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark1100
+install -m 0644 README %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark1100
+install -m 0644 RELEASE.txt %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark1100
+install -m 0644 cmy.txt %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark1100
 cd ..
 
 # Lexmark 2070 colour
@@ -1072,9 +1072,9 @@ cd c2070-0.99
 # Program files
 install -m 755 c2070 %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2070colour
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2070colour
 cp -ax README LICENSE \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2070colour
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2070colour
 cd ..
 
 # Lexmark 2070 grayscale
@@ -1082,9 +1082,9 @@ cd Lexmark2070.latest
 # Program files
 install -m 755 Lexmark2070 %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2070gray
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2070gray
 cp -ax README LICENSE \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2070gray
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2070gray
 cd ..
 
 # Lexmark 7xxx, 57xx, Z51
@@ -1092,14 +1092,14 @@ cd lexmark7000linux-990516
 # Program and data files
 %old_makeinstall
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 CHANGES %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 README %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 lexmark5700-filter %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 lexmark7000-filter %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 lexmark7000linux-990516.lsm %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 lexmarkprotocol.txt %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
-install -m 0644 *.p?? %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark7xxx_57xx_Z51
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 CHANGES %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 README %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 lexmark5700-filter %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 lexmark7000-filter %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 lexmark7000linux-990516.lsm %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 lexmarkprotocol.txt %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
+install -m 0644 *.p?? %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark7xxx_57xx_Z51
 cd ..
 
 # Lexmark Z11
@@ -1114,19 +1114,19 @@ install -d %{buildroot}/etc/LexmarkZ11/
 install -m 644 lz11.conf %{buildroot}/etc/LexmarkZ11/
 install -m 644 *.ppd %{buildroot}%{_datadir}/cups/model/
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkZ11
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkZ11
 cp -ax README ChangeLog INSTALL \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkZ11
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkZ11
 cd ..
 
 # Printer Utility Program
 # Program file
 #install -m 755 pup_1.1/pup %{buildroot}%{_bindir}
 # Documentation
-#install -d %{buildroot}%{_docdir}/printer-utils-%{mainversion}/
-#install -d %{buildroot}%{_docdir}/printer-utils-%{mainversion}/PUP
+#install -d %{buildroot}%{_docdir}/printer-utils-%{version}/
+#install -d %{buildroot}%{_docdir}/printer-utils-%{version}/PUP
 #cp -ax pup_1.1/README \
-#	%{buildroot}%{_docdir}/printer-utils-%{mainversion}/PUP
+#	%{buildroot}%{_docdir}/printer-utils-%{version}/PUP
 
 # Lexmark printer maintenance
 # Program and data files
@@ -1146,11 +1146,11 @@ mkdir -p %{buildroot}%{_datadir}/lm1100maint
 cp -f lm1100maint/lexmark* \
 	%{buildroot}%{_datadir}/lm1100maint/
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-utils-%{mainversion}/
-install -d %{buildroot}%{_docdir}/printer-utils-%{mainversion}/LexmarkMaintenance
+install -d %{buildroot}%{_docdir}/printer-utils-%{version}/
+install -d %{buildroot}%{_docdir}/printer-utils-%{version}/LexmarkMaintenance
 cp -ax lxcontrol/README.* lm1100maint/README.* \
 	README.changecartridge README.Lexmark-Maintenance \
-	%{buildroot}%{_docdir}/printer-utils-%{mainversion}/LexmarkMaintenance
+	%{buildroot}%{_docdir}/printer-utils-%{version}/LexmarkMaintenance
 
 # Install margin and offset adjustment script in /usr/sbin
 bzcat %{SOURCE75} > %{buildroot}%{_sbindir}/alignmargins
@@ -1217,40 +1217,40 @@ install -m 0644  docs/en/pnm2ppa.1 %{buildroot}%{_mandir}/man1
 %old_makeinstall BINDIR=%{buildroot}%{_bindir} CONFDIR=%{buildroot}%{_sysconfdir} MANDIR=%{buildroot}%{_mandir}/man1
 install -m 0755 utils/Linux/detect_ppa %{buildroot}%{_bindir}
 install -m 0755 utils/Linux/test_ppa %{buildroot}%{_bindir}
-install -d  %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pnm2ppa
-install -m 0644 *.ps %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pnm2ppa
+install -d  %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pnm2ppa
+install -m 0644 *.ps %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pnm2ppa
 cd docs/en
 for file in * ; do
   if  [ -f $file ] ; then
-     install -m 0644  $file %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pnm2ppa
+     install -m 0644  $file %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pnm2ppa
   fi
 done
-rm -f %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pnm2ppa/pnm2ppa.1
+rm -f %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pnm2ppa/pnm2ppa.1
 cd ../..
-cp -ax ppa_protocol rhs-printfilters sample_scripts README.security Changelog %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pnm2ppa
+cp -ax ppa_protocol rhs-printfilters sample_scripts README.security Changelog %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pnm2ppa
 cd ..
 cd pbm2ppa-0.8.6
 install -m 0755 pbm2ppa  %{buildroot}%{_bindir}
 install -m 0755 pbmtpg   %{buildroot}%{_bindir}
 install -m 0644 pbm2ppa.conf   %{buildroot}%{_sysconfdir}
 install -m 0644 pbm2ppa.1   %{buildroot}%{_mandir}/man1
-install -d  %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pbm2ppa
+install -d  %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pbm2ppa
 for file in CALIBRATION CREDITS INSTALL INSTALL-MORE LICENSE README ; do
   if [ -f $file ] ; then
-    install -m 0644  $file %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA/pbm2ppa
+    install -m 0644  $file %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA/pbm2ppa
   fi
 done
 cd ..
-install -m 0644 README.calibration %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPDeskJetPPA
+install -m 0644 README.calibration %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPDeskJetPPA
 
 # Lexmark 2050
 cd c2050-0.4
 # Program file
 install -m 0755 c2050 %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2050
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2050
 cp -ax README COPYING ps2lexmark \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2050
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2050
 cd ..
 
 # Lexmark 2030
@@ -1258,9 +1258,9 @@ cd pbm2l2030
 # Program file
 install -m 0755 pbm2l2030 %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2030
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2030
 cp -ax README.TXT LICENSE \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/Lexmark2030
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/Lexmark2030
 cd ..
 
 # Okipage 4w and compatible winprinters
@@ -1274,15 +1274,15 @@ install -d %{buildroot}%{_initrddir}
 install -m 0755 oki4daemon %{buildroot}%{_initrddir}
 #install -m 0755 oki4w_install %{buildroot}%{_sbindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/OKI-Winprinters
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/OKI-Winprinters
 #cp -ax README.OKI-Winprinters \
-#	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/OKI-Winprinters
+#	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/OKI-Winprinters
 cd oki4linux-2.0
 cp -ax COPYING ChangeLog README crack doc samples \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/OKI-Winprinters
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/OKI-Winprinters
 cd src
 cp -ax README.oki4daemon align.ps oki4daemon.init \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/OKI-Winprinters
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/OKI-Winprinters
 install -m 0644 oki4drv.man %{buildroot}%{_mandir}/man1/oki4drv.1
 cd ../..
 
@@ -1292,9 +1292,9 @@ cd ppmtocpva-1.0
 install -m 0755 ppmtocpva %{buildroot}%{_bindir}
 install -m 0755 cpva-colour %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CitizenPrintiva600C
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CitizenPrintiva600C
 cp -ax README \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CitizenPrintiva600C
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CitizenPrintiva600C
 cd ..
 
 # CoStar and compatible label printers
@@ -1302,9 +1302,9 @@ cd pbm2lwxl
 # Program file
 install -m 0755 *2lwxl %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/DymoCoStarAvery-LabelPrinters
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/DymoCoStarAvery-LabelPrinters
 cp -ax README *.html \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/DymoCoStarAvery-LabelPrinters
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/DymoCoStarAvery-LabelPrinters
 cd ..
 
 %ifarch %{ix86}
@@ -1313,10 +1313,10 @@ cd ml85p-*
 # Program file
 install -m 4750 ml85p %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/SamsungML-85G
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/SamsungML-85G
 cp -ax COPYING NEWS README THANKS ml85-print ml85-test ml85p-*.lsm \
 	printcap \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/SamsungML-85G
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/SamsungML-85G
 cd ..
 %endif
 
@@ -1328,11 +1328,11 @@ cd ../z42tool/
 %makeinstall
 cd ..
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkZ42
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkZ42
 cp -ax COPYING README FAQ ChangeLog \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkZ42
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkZ42
 cp -ax z42tool/README \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkZ42/README.z42tool
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkZ42/README.z42tool
 cd ..
 
 # GhostScript wrapper for the Pentax PocketJet printers
@@ -1348,9 +1348,9 @@ cat > %{buildroot}%{_sysconfdir}/pentaxpj.conf <<EOF
 set settings(driverpath) %{_libdir}/pentaxpj
 EOF
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/PentaxPocketJet
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/PentaxPocketJet
 cp -ax README \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/PentaxPocketJet
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/PentaxPocketJet
 cd ..
 
 # Unix driver for MicroDry Printers
@@ -1358,9 +1358,9 @@ cd ppmtomd*
 # Program files
 install -m 0755 ppmtomd %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/MicroDryPrinters
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/MicroDryPrinters
 cp -ax LICENCE \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/MicroDryPrinters
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/MicroDryPrinters
 cp ppmtomd.man %{buildroot}%{_mandir}/man1/ppmtomd.1
 cd ..
 
@@ -1379,10 +1379,10 @@ install -m 0755 etc/mtink-cups %{buildroot}%{_prefix}/lib/cups/backend/mtink
 install -m 0755 gimp-mtink %{buildroot}%{_libdir}/gimp/2.0/plug-ins/
 install -d %{buildroot}/var/mtink
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-utils-%{mainversion}/EpsonInkjetMaintenance
+install -d %{buildroot}%{_docdir}/printer-utils-%{version}/EpsonInkjetMaintenance
 cp -ax CHANGE.LOG doc/* \
-	%{buildroot}%{_docdir}/printer-utils-%{mainversion}/EpsonInkjetMaintenance
-cp -ax etc/readme %{buildroot}%{_docdir}/printer-utils-%{mainversion}/EpsonInkjetMaintenance/README.mtinkd.startup
+	%{buildroot}%{_docdir}/printer-utils-%{version}/EpsonInkjetMaintenance
+cp -ax etc/readme %{buildroot}%{_docdir}/printer-utils-%{version}/EpsonInkjetMaintenance/README.mtinkd.startup
 cd ..
 
 # Poster - Poster-printing on stndard sized paper 
@@ -1391,9 +1391,9 @@ cd poster*
 install -m 0755 poster %{buildroot}%{_bindir}
 # Documentation
 cp poster.1 %{buildroot}%{_mandir}/man1
-install -d %{buildroot}%{_docdir}/printer-utils-%{mainversion}/PosterPrinting
+install -d %{buildroot}%{_docdir}/printer-utils-%{version}/PosterPrinting
 cp -ax ChangeLog README COPYING \
-	%{buildroot}%{_docdir}/printer-utils-%{mainversion}/PosterPrinting
+	%{buildroot}%{_docdir}/printer-utils-%{version}/PosterPrinting
 cd ..
 
 # Driver for HP LaserJet 1000
@@ -1401,9 +1401,9 @@ cd ..
 # Program files
 install -m 0755 pbmtozjs %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPLaserJet1000
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPLaserJet1000
 cp -ax pbmtozjs.txt \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/HPLaserJet1000
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/HPLaserJet1000
 
 # Driver for Zenographics-based printers (Minolta magicolor DL series, HP
 # LaserJet 1000, 1005, 1018, 1020, 1022, Color LaserJet 1600, 2600)
@@ -1448,12 +1448,12 @@ install -d %{buildroot}%{_datadir}/foo2hp/icm
 ln -s /etc/printer %{buildroot}%{_datadir}/foo2zjs/firmware
 ln -s /etc/printer %{buildroot}%{_datadir}/firmware
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/foo2zjs
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/foo2zjs
 cp -ax COPYING ChangeLog INSTALL INSTALL.usb README \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/foo2zjs
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/foo2zjs/icc2ps
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/foo2zjs
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/foo2zjs/icc2ps
 cp -ax icc2ps/[ACR]* \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/foo2zjs/icc2ps
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/foo2zjs/icc2ps
 cp foo2[hz]*.1 zjs*.1 %{buildroot}%{_mandir}/man1/
 cd ..
 
@@ -1462,9 +1462,9 @@ cd epsonepl*
 # Program files
 %makeinstall
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/EpsonEPL_L_Series
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/EpsonEPL_L_Series
 cp -ax ChangeLog epl_docs FAQ LIMITATIONS README \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/EpsonEPL_L_Series
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/EpsonEPL_L_Series
 cd ..
 
 # Driver for Lexmark X125 (only printing)
@@ -1473,15 +1473,15 @@ install -m 0755 drv_x125/src/x125_cmyk %{buildroot}%{_bindir}
 install -m 0755 drv_x125/src/x125_cmyk_print.sh %{buildroot}%{_bindir}
 install -m 0755 drv_x125_network/src/x125_network %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkX125
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkX125
 cd drv_x125
 cp -ax ChangeLog FAQ INSTALL LICENSE README src/*.ps \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkX125
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkX125
 cd ..
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkX125/drv_x125_network
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkX125/drv_x125_network
 cd drv_x125_network
 cp -ax ChangeLog FAQ INSTALL LICENSE README \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/LexmarkX125/drv_x125_network
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/LexmarkX125/drv_x125_network
 cd ..
 
 %ifarch %{ix86}
@@ -1494,9 +1494,9 @@ install -m 0755 lbp[46]60-* %{buildroot}%{_bindir}
 install -d %{buildroot}%{_datadir}/cups/model/lbp660
 cp ppd/*.ppd %{buildroot}%{_datadir}/cups/model/lbp660
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CanonLBP-460-660
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CanonLBP-460-660
 cp -ax COPYING NEWS README THANKS TODO \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CanonLBP-460-660
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CanonLBP-460-660
 cd ..
 %endif
 
@@ -1509,9 +1509,9 @@ install -m 0755 capt-* %{buildroot}%{_bindir}
 install -d %{buildroot}%{_datadir}/cups/model/capt
 cp ppd/*.ppd %{buildroot}%{_datadir}/cups/model/capt
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CanonLBP-810-1120
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CanonLBP-810-1120
 cp -ax COPYING NEWS README SPECS THANKS TODO \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CanonLBP-810-1120
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CanonLBP-810-1120
 cd ..
 
 # Driver for Lexmark X74/X75
@@ -1531,9 +1531,9 @@ install -m 0644 lxx74.convs %{buildroot}%{_sysconfdir}/cups
 install -d %{buildroot}%{_datadir}/cups/model/lxx74
 cp *.ppd* %{buildroot}%{_datadir}/cups/model/lxx74
 # Documentation
-#install -d %{buildroot}%{_docdir}/cups-drivers-%{mainversion}/LexmarkX74X75
+#install -d %{buildroot}%{_docdir}/cups-drivers-%{version}/LexmarkX74X75
 #cp -ax INSTALL LICENSE README lpoptions \
-#	%{buildroot}%{_docdir}/cups-drivers-%{mainversion}/LexmarkX74X75
+#	%{buildroot}%{_docdir}/cups-drivers-%{version}/LexmarkX74X75
 cd ..
 
 # Driver for Minolta magicolor 2300W
@@ -1544,8 +1544,8 @@ install -c -m 644 foomatic/$dir/*.xml \
 	%{buildroot}%{_datadir}/foomatic/db/source/$dir/; \
 done
 # Move documentation to the correct place
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/
-mv %{buildroot}%{_docdir}/m2300w* %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/MinoltaMagicolor2300W
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/
+mv %{buildroot}%{_docdir}/m2300w* %{buildroot}%{_docdir}/printer-filters-doc-%{version}/MinoltaMagicolor2300W
 cd ..
 
 # Driver for Minolta PagePro 12xxW, 13xxW, and 14xxW
@@ -1555,9 +1555,9 @@ install -m 0755 min12xxw %{buildroot}%{_bindir}
 install -m 0755 esc-m %{buildroot}%{_bindir}
 # Documentation
 install -m 0644 min12xxw.1* %{buildroot}%{_mandir}/man1
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/MinoltaPagePro12xxW_13xxW_14xxW
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/MinoltaPagePro12xxW_13xxW_14xxW
 cp -ax COPYING README ChangeLog FAQ INSTALL NEWS format.txt usblogs \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/MinoltaPagePro12xxW_13xxW_14xxW
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/MinoltaPagePro12xxW_13xxW_14xxW
 cd ..
 
 # Driver for Casio USB label printers
@@ -1566,9 +1566,9 @@ cd pegg-*
 install -m 0755 pegg %{buildroot}%{_bindir}
 # Documentation
 install -m 0644 pegg.1.gz %{buildroot}%{_mandir}/man1
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CasioUSBLabelPrinters/pegg
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CasioUSBLabelPrinters/pegg
 cp -ax LICENSE README CHANGELOG INSTALL test_raw \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CasioUSBLabelPrinters/pegg
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CasioUSBLabelPrinters/pegg
 cd ..
 cd pegg_el-*/src
 # Program files
@@ -1576,18 +1576,18 @@ install -m 0755 pegg_el %{buildroot}%{_bindir}
 # Documentation
 install -m 0644 pegg_el.1.gz %{buildroot}%{_mandir}/man1
 cd ..
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CasioUSBLabelPrinters/pegg_el
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CasioUSBLabelPrinters/pegg_el
 cp -ax TODO LICENSE README INSTALL src/test_raw \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CasioUSBLabelPrinters/pegg_el
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CasioUSBLabelPrinters/pegg_el
 cd ..
 cd xbm2crw*
 # Program files
 install -m 0755 xbm2crw %{buildroot}%{_bindir}
 #install -m 0755 html2crw.sh %{buildroot}%{_bindir}
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CasioUSBLabelPrinters/xbm2crw
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/CasioUSBLabelPrinters/xbm2crw
 cp -ax LICENSE README template.xbm \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/CasioUSBLabelPrinters/xbm2crw
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/CasioUSBLabelPrinters/xbm2crw
 cd ..
 cd cups2pegg*/src
 # Program files
@@ -1597,9 +1597,9 @@ install -d %{buildroot}%{_datadir}/cups/model/pegg
 cp ppd/*.ppd* %{buildroot}%{_datadir}/cups/model/pegg
 cd ..
 # Documentation
-install -d %{buildroot}%{_docdir}/cups-drivers-%{mainversion}/CasioUSBLabelPrinters/cups2pegg
+install -d %{buildroot}%{_docdir}/cups-drivers-%{version}/CasioUSBLabelPrinters/cups2pegg
 cp -ax LICENSE *.html *.png \
-	%{buildroot}%{_docdir}/cups-drivers-%{mainversion}/CasioUSBLabelPrinters/cups2pegg
+	%{buildroot}%{_docdir}/cups-drivers-%{version}/CasioUSBLabelPrinters/cups2pegg
 cd ..
 
 # Drivers for the Konica Minolta magicolor DL series supplied by Konica
@@ -1610,9 +1610,9 @@ for d in magicolor????DL*; do
 	make DESTDIR=%{buildroot} install
 	# Documentation
 	n=`echo $d | perl -e '$s = <>; $s =~ /magicolor(\d+)DL/i; print "$1"'`
-	install -d %{buildroot}%{_docdir}/cups-drivers-%{mainversion}/KonicaMinoltaMagicolor${n}DL
+	install -d %{buildroot}%{_docdir}/cups-drivers-%{version}/KonicaMinoltaMagicolor${n}DL
 	cp -ax AUTHORS COPYING ChangeLog kmlf.spec \
-	%{buildroot}%{_docdir}/cups-drivers-%{mainversion}/KonicaMinoltaMagicolor${n}DL
+	%{buildroot}%{_docdir}/cups-drivers-%{version}/KonicaMinoltaMagicolor${n}DL
 	cd ..
 done
 rm -f %{buildroot}%{_datadir}/KONICA_MINOLTA/*/COPYING
@@ -1628,8 +1628,8 @@ install -c -m 644 $dir/*.xml \
 	%{buildroot}%{_datadir}/foomatic/db/source/$dir/; \
 done
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/BrotherPTouch
-cp AUTHORS ChangeLog COPYING INSTALL NEWS README %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/BrotherPTouch
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/BrotherPTouch
+cp AUTHORS ChangeLog COPYING INSTALL NEWS README %{buildroot}%{_docdir}/printer-filters-doc-%{version}/BrotherPTouch
 cd ..
 
 # Driver for Kyocera GDI printers: Kyocera FS-1016MFP
@@ -1642,9 +1642,9 @@ install -c -m 644 foomatic-db/$dir/foo2kyo*.xml \
 	%{buildroot}%{_datadir}/foomatic/db/source/$dir/; \
 done
 # Documentation
-install -d %{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/foo2kyo
+install -d %{buildroot}%{_docdir}/printer-filters-doc-%{version}/foo2kyo
 cp -ax COPYING jbig.doc \
-	%{buildroot}%{_docdir}/printer-filters-doc-%{mainversion}/foo2kyo
+	%{buildroot}%{_docdir}/printer-filters-doc-%{version}/foo2kyo
 cd ..
 
 # Driver for Samsung SPL2 printers
@@ -1655,9 +1655,9 @@ install -m 755 -s src/rastertospl2 %{buildroot}%{_prefix}/lib/cups/filter/
 install -d %{buildroot}%{_datadir}/cups/model/samsung
 cp ppd/*.ppd* %{buildroot}%{_datadir}/cups/model/samsung
 # Documentation
-install -d %{buildroot}%{_docdir}/cups-drivers-%{mainversion}/SamsungSPL2
+install -d %{buildroot}%{_docdir}/cups-drivers-%{version}/SamsungSPL2
 cp -ax AUTHORS ChangeLog COPYING INSTALL README TODO \
-	%{buildroot}%{_docdir}/cups-drivers-%{mainversion}/SamsungSPL2
+	%{buildroot}%{_docdir}/cups-drivers-%{version}/SamsungSPL2
 cd ..
 
 
