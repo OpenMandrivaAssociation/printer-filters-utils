@@ -4,7 +4,7 @@
 Summary:	Filter-style and IJS printer drivers, printer maintenance utilities
 Name:		printer-filters-utils
 Version:	2008
-Release:	15
+Release:	16
 License:	GPLv2
 Group:		Publishing
 Url:		http://www.linuxprinting.org/
@@ -213,7 +213,6 @@ Conflicts:	ghostscript < 8.15
 
 # <mrl> Requires for the packages that are obsoleting this one.
 Requires:	lm1100
-Requires:	mtink
 Requires:	poster
 Requires:	printer-utils
 
@@ -231,7 +230,6 @@ Requires:	cups-drivers-magicolor5430dl
 Requires:	cups-drivers-magicolor5440dl
 Requires:	cups-drivers-pegg
 Requires:	cups-drivers-splix
-Requires:	mtink
 
 ##### DESCRIPTION TEXTS
 
