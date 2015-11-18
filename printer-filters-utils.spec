@@ -208,13 +208,11 @@ Obsoletes:	ghostscript-utils Lexmark-printer-maintenance
 Provides:	ghostscript-utils Lexmark-printer-maintenance
 Requires(post):	rpm-helper
 Requires(preun):rpm-helper
-Requires:	lesstif
+#Requires:	lesstif
 Conflicts:	ghostscript < 8.15
-
 # <mrl> Requires for the packages that are obsoleting this one.
 Requires:	lm1100
 Requires:	poster
-Requires:	printer-utils
 
 %package -n cups-drivers
 Summary:	Special CUPS printer drivers
