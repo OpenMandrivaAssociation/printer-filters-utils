@@ -4,7 +4,7 @@
 Summary:	Filter-style and IJS printer drivers, printer maintenance utilities
 Name:		printer-filters-utils
 Version:	2008
-Release:	18
+Release:	19
 License:	GPLv2
 Group:		Publishing
 Url:		http://www.linuxprinting.org/
@@ -144,7 +144,7 @@ BuildRequires:	cups-common
 BuildRequires:  ghostscript
 BuildRequires:	gmp-devel
 BuildRequires:	jbig-devel
-BuildRequires:	lesstif-devel
+BuildRequires:	motif-devel
 BuildRequires:	netpbm-devel
 BuildRequires:	tiff-devel
 BuildRequires:	pkgconfig(gimp-2.0)
@@ -208,7 +208,6 @@ Obsoletes:	ghostscript-utils Lexmark-printer-maintenance
 Provides:	ghostscript-utils Lexmark-printer-maintenance
 Requires(post):	rpm-helper
 Requires(preun):rpm-helper
-#Requires:	lesstif
 Conflicts:	ghostscript < 8.15
 # <mrl> Requires for the packages that are obsoleting this one.
 Requires:	lm1100
