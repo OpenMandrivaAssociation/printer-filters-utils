@@ -4,7 +4,7 @@
 Summary:	Filter-style and IJS printer drivers, printer maintenance utilities
 Name:		printer-filters-utils
 Version:	2008
-Release:	21
+Release:	22
 License:	GPLv2
 Group:		Publishing
 Url:		http://www.linuxprinting.org/
@@ -24,7 +24,7 @@ Source55:	http://bimbo.fjfi.cvut.cz/~paluch/l7kdriver/lexmark7000linux-990516.ta
 Source56:	http://sourceforge.net/projects/lz11/lz11-V2-1.2.tar.bz2
 #Source56:	http://sourceforge.net/projects/lz11/lz11-cvs20030907.tar.bz2
 # HP DeskJet PPA printers
-Source62:	http://download.sourceforge.net/pnm2ppa/pnm2ppa-1.12.tar.bz2
+Source62:	https://downloads.sourceforge.net/project/pnm2ppa/pnm2ppa/1.13/pnm2ppa-1.13.tar.gz
 Source63:	http://www.httptech.com/ppa/files/ppa-0.8.6.tar.bz2
 # Lexmark 2050
 Source64:	http://www.prato.linux.it/~mnencia/lexmark2050/c2050-0.4.tar.bz2

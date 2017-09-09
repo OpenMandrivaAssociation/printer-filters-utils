@@ -39,7 +39,6 @@ sources:
   "pegg-0.23.tar.bz2": 1dcf1c6d48695bf85747af4cb1a088698bb0bfaa
   "pegg_el-0.11.tar.bz2": 7ffb915b177310b19e56e645b496b780321cf014
   "pentaxpj-1.0.0.tar.bz2": ffda0ecf647ede63f5dd0e432842b21a7e817ac3
-  "pnm2ppa-1.12.tar.bz2": 59e09baefd6275d149c3f13d7613d12cf6ce3df7
   "poster-1.0.1.tar.bz2": d206b4e42f0067cd255b3325b82870ec093a1975
   "ppa-0.8.6.tar.bz2": 04932356d612648c8f748bac0a94ffbda262eaf9
   "ppmtocpva-1.0.tar.bz2": b687749a1483aa4b296f1ea3bcf8569e3c72bc2a
@@ -53,3 +52,4 @@ sources:
   "x125-drv-0.2.3.tar.bz2": 9dc7385e2ad19b47a67c9bb6f4691b140cd38de1
   "x125-drv-network-0.2.0.tar.bz2": 938a814c0da2bac608d62e1d61185e9ef25ee1c9
   "xbm2crw-0.4.tar.bz2": 7c2f0a221e24ab43bbe371a2ff98f245d6afbfa4
+  pnm2ppa-1.13.tar.gz: 3de33786e9d3f35a73d7e4acb5281f30654cef7c
