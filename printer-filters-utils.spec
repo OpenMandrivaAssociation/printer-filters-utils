@@ -7,7 +7,7 @@ Version:	2008
 Release:	25
 License:	GPLv2
 Group:		Publishing
-Url:		http://www.linuxprinting.org/
+Url:		https://www.linuxprinting.org/
 # Apple StyleWriter
 Source50:	http://homepage.mac.com/monroe/styl/stylewriter.tar.bz2
 # Canon CaPSL
