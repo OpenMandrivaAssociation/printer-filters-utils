@@ -140,6 +140,11 @@ Patch100:	ppmtocpva-1.0-includes.patch
 Patch101:	ppmtocpva-1.0-netpbm.patch
 Patch102:	ppmtomd-1.3-netpbm.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	cups-common
 BuildRequires:  ghostscript
 BuildRequires:	gmp-devel
